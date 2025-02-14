@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/Model/category_model.dart';
+import 'package:foodgo/Service/category_data.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -9,6 +11,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<CategoryModel> categories = [];
+  String track = "0";
+  @override
+  void initState() {
+    categories = getCategories();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,9 +89,76 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
+            SizedBox(height: 20),
+            Container(
+              height: 60,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: categories.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return CategoryTile(
+                    categories[index].name!,
+                    categories[index].image!,
+                    index.toString(),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget CategoryTile(String name, String image, String categoryindex) {
+    return GestureDetector(
+      onTap: () {
+        track = categoryindex.toString();
+        setState(() {});
+      },
+      child:
+          track == categoryindex
+              ? Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                margin: EdgeInsets.only(right: 20),
+                decoration: BoxDecoration(
+                  color: Color(0xffef2b39),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      image,
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(width: 10),
+                    Text(name, style: AppWidget.WhiteTextStyle()),
+                  ],
+                ),
+              )
+              : Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                margin: EdgeInsets.only(right: 20),
+                decoration: BoxDecoration(
+                  color: Color(0xffececf8),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      image,
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(width: 10),
+                    Text(name, style: AppWidget.SimpleTextStyle()),
+                  ],
+                ),
+              ),
     );
   }
 }

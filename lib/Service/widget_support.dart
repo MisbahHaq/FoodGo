@@ -21,4 +21,14 @@ class AppWidget {
       ),
     );
   }
+
+  static TextStyle WhiteTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
 }
