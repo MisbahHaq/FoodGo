@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/Service/widget_support.dart';
 
 class onBoarding extends StatefulWidget {
   const onBoarding({super.key});
@@ -17,7 +18,12 @@ class _onBoardingState extends State<onBoarding> {
         child: Column(
           children: [
             Image.asset("assets/images/onboard.png"),
-            Text("The Fastest\nFood Delivery"),
+            SizedBox(height: 20),
+            Text(
+              "The Fastest\nFood Delivery",
+              textAlign: TextAlign.center,
+              style: AppWidget.HeadlineTextStyle(),
+            ),
           ],
         ),
       ),
