@@ -24,11 +24,30 @@ class _onBoardingState extends State<onBoarding> {
               textAlign: TextAlign.center,
               style: AppWidget.HeadlineTextStyle(),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 25),
             Text(
-              "Craving something delicious? Order now and get your favorites delivered fast!",
+              "Craving something delicious?\nOrder now and get your favorites\ndelivered fast!",
               style: AppWidget.SimpleTextStyle(),
               textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Container(
+              height: 60,
+              width: MediaQuery.of(context).size.width / 2,
+              decoration: BoxDecoration(
+                color: Color(0xffBc592a),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  "Get Started",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
