@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(height: 20),
             Container(
-              height: 60,
+              height: 70,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: categories.length,
@@ -120,28 +120,35 @@ class _HomeState extends State<Home> {
       child:
           track == categoryindex
               ? Container(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                margin: EdgeInsets.only(right: 20),
-                decoration: BoxDecoration(
-                  color: Color(0xffef2b39),
+                margin: EdgeInsets.only(right: 20, bottom: 10),
+                child: Material(
+                  elevation: 3,
                   borderRadius: BorderRadius.circular(30),
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      image,
-                      height: 40,
-                      width: 40,
-                      fit: BoxFit.cover,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+
+                    decoration: BoxDecoration(
+                      color: Color(0xffef2b39),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    SizedBox(width: 10),
-                    Text(name, style: AppWidget.WhiteTextStyle()),
-                  ],
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          image,
+                          height: 40,
+                          width: 40,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(width: 10),
+                        Text(name, style: AppWidget.WhiteTextStyle()),
+                      ],
+                    ),
+                  ),
                 ),
               )
               : Container(
                 padding: EdgeInsets.only(left: 20, right: 20),
-                margin: EdgeInsets.only(right: 20),
+                margin: EdgeInsets.only(right: 20, bottom: 10),
                 decoration: BoxDecoration(
                   color: Color(0xffececf8),
                   borderRadius: BorderRadius.circular(30),
