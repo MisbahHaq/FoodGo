@@ -26,7 +26,7 @@ class _onBoardingState extends State<onBoarding> {
             ),
             SizedBox(height: 25),
             Text(
-              "Craving something delicious?\nOrder now and get your favorites\ndelivered fast!",
+              "Craving something delicious?\nOrder now and get your favourites\ndelivered fast!",
               style: AppWidget.SimpleTextStyle(),
               textAlign: TextAlign.center,
             ),

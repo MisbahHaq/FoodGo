@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/Pages/home.dart';
 import 'package:foodgo/Pages/onBoarding.dart';
 
 void main() {
@@ -10,6 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: onBoarding());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Home());
   }
 }
