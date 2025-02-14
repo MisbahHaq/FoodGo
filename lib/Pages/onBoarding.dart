@@ -11,8 +11,15 @@ class _onBoardingState extends State<onBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
-        child: Column(children: [Image.asset("assets/images/onboard.png")]),
+        margin: EdgeInsets.only(top: 40),
+        child: Column(
+          children: [
+            Image.asset("assets/images/onboard.png"),
+            Text("The Fastest\nFood Delivery"),
+          ],
+        ),
       ),
     );
   }
