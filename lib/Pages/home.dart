@@ -110,6 +110,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             Container(
+              height: MediaQuery.of(context).size.height / 2,
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -133,9 +134,9 @@ class _HomeState extends State<Home> {
       child: Column(
         children: [
           Image.asset(
-            "assets/images/pizza1.png",
-            width: 100,
-            height: 100,
+            image,
+            width: 150,
+            height: 150,
             fit: BoxFit.cover,
           ),
           Text("Cheese Pizza"),
