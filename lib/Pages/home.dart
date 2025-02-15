@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodgo/Model/category_model.dart';
+import 'package:foodgo/Model/pizza_model.dart';
 import 'package:foodgo/Service/category_data.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
@@ -12,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
+  List<PizzaModel> pizza = [];
   String track = "0";
   @override
   void initState() {
@@ -117,55 +119,53 @@ class _HomeState extends State<Home> {
         track = categoryindex.toString();
         setState(() {});
       },
-      child:
-          track == categoryindex
-              ? Container(
-                margin: EdgeInsets.only(right: 20, bottom: 10),
-                child: Material(
-                  elevation: 3,
-                  borderRadius: BorderRadius.circular(30),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-
-                    decoration: BoxDecoration(
-                      color: Color(0xffef2b39),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          image,
-                          height: 40,
-                          width: 40,
-                          fit: BoxFit.cover,
-                        ),
-                        SizedBox(width: 10),
-                        Text(name, style: AppWidget.WhiteTextStyle()),
-                      ],
-                    ),
+      child: track == categoryindex
+          ? Container(
+              margin: EdgeInsets.only(right: 20, bottom: 10),
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(30),
+                child: Container(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xffef2b39),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        image,
+                        height: 40,
+                        width: 40,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(width: 10),
+                      Text(name, style: AppWidget.WhiteTextStyle()),
+                    ],
                   ),
                 ),
-              )
-              : Container(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                margin: EdgeInsets.only(right: 20, bottom: 10),
-                decoration: BoxDecoration(
-                  color: Color(0xffececf8),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      image,
-                      height: 40,
-                      width: 40,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(width: 10),
-                    Text(name, style: AppWidget.SimpleTextStyle()),
-                  ],
-                ),
               ),
+            )
+          : Container(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              margin: EdgeInsets.only(right: 20, bottom: 10),
+              decoration: BoxDecoration(
+                color: Color(0xffececf8),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Row(
+                children: [
+                  Image.asset(
+                    image,
+                    height: 40,
+                    width: 40,
+                    fit: BoxFit.cover,
+                  ),
+                  SizedBox(width: 10),
+                  Text(name, style: AppWidget.SimpleTextStyle()),
+                ],
+              ),
+            ),
     );
   }
 }
