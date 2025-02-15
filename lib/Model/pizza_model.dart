@@ -1,1 +1,4 @@
-class PizzaModel {}
+class PizzaModel {
+  String? name;
+  String? image;
+}
