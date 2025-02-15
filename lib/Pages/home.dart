@@ -137,7 +137,7 @@ class _HomeState extends State<Home> {
             image,
             width: 150,
             height: 150,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
           Text("Cheese Pizza"),
           Text("\$40")
