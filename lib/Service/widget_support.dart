@@ -38,4 +38,13 @@ class AppWidget {
           color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
+
+  static TextStyle PriceTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+          color: const Color.fromARGB(174, 0, 0, 0),
+          fontSize: 24,
+          fontWeight: FontWeight.bold),
+    );
+  }
 }
