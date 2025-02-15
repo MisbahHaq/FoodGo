@@ -126,7 +126,14 @@ class _HomeState extends State<Home> {
   Widget FoodTile(String name, String image, String price) {
     return Container(
       child: Column(
-        children: [],
+        children: [
+          Image.asset(
+            "assets/images/pizza1.png",
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
+          ),
+        ],
       ),
     );
   }
