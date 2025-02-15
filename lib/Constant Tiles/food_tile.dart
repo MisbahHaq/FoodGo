@@ -22,8 +22,25 @@ Widget FoodTile(String name, String image, String price) {
           style: AppWidget.BoldTextStyle(),
         ),
         Text(
-          "\$40",
+          "\$" + price,
           style: AppWidget.PriceTextStyle(),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Color(0xffef2b39),
+              ),
+              child: Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
+              ),
+            ),
+          ],
         )
       ],
     ),
