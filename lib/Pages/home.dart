@@ -109,14 +109,19 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.6,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10),
-                itemCount: pizza.length,
-                itemBuilder: (context, index) {})
+            Container(
+              child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.6,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10),
+                  itemCount: pizza.length,
+                  itemBuilder: (context, index) {
+                    return FoodTile(pizza[index].name!, pizza[index].image!,
+                        pizza[index].price!);
+                  }),
+            )
           ],
         ),
       ),
@@ -133,6 +138,8 @@ class _HomeState extends State<Home> {
             height: 100,
             fit: BoxFit.cover,
           ),
+          Text("Cheese Pizza"),
+          Text("\$40")
         ],
       ),
     );
