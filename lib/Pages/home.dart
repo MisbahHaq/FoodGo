@@ -123,6 +123,8 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget FoodTile(String name, String image)
+
   Widget CategoryTile(String name, String image, String categoryindex) {
     return GestureDetector(
       onTap: () {
