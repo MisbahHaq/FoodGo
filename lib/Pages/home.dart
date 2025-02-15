@@ -96,8 +96,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             SizedBox(height: 20),
-            Container(
-              height: 70,
+            Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: categories.length,
@@ -116,7 +115,7 @@ class _HomeState extends State<Home> {
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.6,
+                      childAspectRatio: 0.7,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10),
                   itemCount: pizza.length,

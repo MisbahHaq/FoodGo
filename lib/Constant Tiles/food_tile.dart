@@ -3,15 +3,19 @@ import 'package:foodgo/Service/widget_support.dart';
 
 Widget FoodTile(String name, String image, String price) {
   return Container(
+    margin: EdgeInsets.only(right: 20),
+    padding: EdgeInsets.only(left: 10, top: 10),
     decoration: BoxDecoration(border: Border.all(color: Colors.black38)),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.asset(
-          image,
-          width: 150,
-          height: 150,
-          fit: BoxFit.contain,
+        Center(
+          child: Image.asset(
+            image,
+            width: 150,
+            height: 150,
+            fit: BoxFit.contain,
+          ),
         ),
         Text(
           name,
