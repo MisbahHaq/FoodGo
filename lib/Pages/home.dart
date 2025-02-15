@@ -123,7 +123,13 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget FoodTile(String name, String image)
+  Widget FoodTile(String name, String image, String price) {
+    return Container(
+      child: Column(
+        children: [],
+      ),
+    );
+  }
 
   Widget CategoryTile(String name, String image, String categoryindex) {
     return GestureDetector(

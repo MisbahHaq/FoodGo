@@ -7,25 +7,25 @@ List<PizzaModel> getPizza() {
   PizzaModel pizzaModel = new PizzaModel();
 
   pizzaModel.name = "Cheese & Veg Pizza";
-  pizzaModel.image = "assets/images/pizza1.jpg";
+  pizzaModel.image = "assets/images/pizza1.png";
   pizzaModel.price = "50";
   pizza.add(pizzaModel);
   pizzaModel = new PizzaModel();
 
   pizzaModel.name = "Margherita Pizza";
-  pizzaModel.image = "assets/images/pizza2.jpg";
+  pizzaModel.image = "assets/images/pizza2.png";
   pizzaModel.price = "80";
   pizza.add(pizzaModel);
   pizzaModel = new PizzaModel();
 
   pizzaModel.name = "Cheese Pizza";
-  pizzaModel.image = "assets/images/pizza3.jpg";
+  pizzaModel.image = "assets/images/pizza3.png";
   pizzaModel.price = "70";
   pizza.add(pizzaModel);
   pizzaModel = new PizzaModel();
 
   pizzaModel.name = "GodSpell Pizza";
-  pizzaModel.image = "assets/images/pizza4.jpg";
+  pizzaModel.image = "assets/images/pizza4.png";
   pizzaModel.price = "60";
   pizza.add(pizzaModel);
   pizzaModel = new PizzaModel();
