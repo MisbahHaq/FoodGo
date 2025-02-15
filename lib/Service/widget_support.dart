@@ -35,7 +35,7 @@ class AppWidget {
   static TextStyle BoldTextStyle() {
     return GoogleFonts.poppins(
       textStyle: TextStyle(
-          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
     );
   }
 
