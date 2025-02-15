@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodgo/Model/category_model.dart';
 import 'package:foodgo/Model/pizza_model.dart';
 import 'package:foodgo/Service/category_data.dart';
+import 'package:foodgo/Service/pizza_data.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     categories = getCategories();
+    pizza = getPizza();
     super.initState();
   }
 
