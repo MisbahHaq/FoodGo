@@ -96,7 +96,8 @@ class _HomeState extends State<Home> {
               ],
             ),
             SizedBox(height: 20),
-            Expanded(
+            Container(
+              height: 70,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: categories.length,
@@ -110,8 +111,7 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
+            Expanded(
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
