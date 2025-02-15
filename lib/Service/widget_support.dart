@@ -31,4 +31,11 @@ class AppWidget {
       ),
     );
   }
+
+  static TextStyle BoldTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+          color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+    );
+  }
 }
