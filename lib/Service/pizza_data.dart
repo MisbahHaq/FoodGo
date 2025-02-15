@@ -10,4 +10,9 @@ List<PizzaModel> getPizza() {
   pizzaModel.image = "assets/images/pizza1.jpg";
   pizza.add(pizzaModel);
   pizzaModel = new PizzaModel();
+
+  pizzaModel.name = "Margherita Pizza";
+  pizzaModel.image = "assets/images/pizza2.jpg";
+  pizza.add(pizzaModel);
+  pizzaModel = new PizzaModel();
 }
