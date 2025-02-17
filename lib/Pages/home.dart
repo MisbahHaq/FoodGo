@@ -131,6 +131,7 @@ class _HomeState extends State<Home> {
                         pizza[index].name!,
                         pizza[index].image!,
                         pizza[index].price!,
+                        pizza[index].desc!,
                       );
                     },
                   ),
@@ -151,6 +152,7 @@ class _HomeState extends State<Home> {
                         burger[index].name!,
                         burger[index].image!,
                         burger[index].price!,
+                        burger[index].desc!,
                       );
                     },
                   ),
@@ -162,7 +164,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget FoodTile(String name, String image, String price) {
+  Widget FoodTile(String name, String image, String price, String desc) {
     return Container(
       margin: EdgeInsets.only(right: 20),
       padding: EdgeInsets.only(left: 10, top: 10),
@@ -197,6 +199,7 @@ class _HomeState extends State<Home> {
                             image: image,
                             name: name,
                             price: price,
+                            desc: desc,
                           ),
                     ),
                   );

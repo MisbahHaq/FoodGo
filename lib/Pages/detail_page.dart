@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class DetailPage extends StatefulWidget {
-  final String image;
-  final String name;
-  final String price;
-  final String desc;
-  DetailPage({
-    required this.image,
-    required this.name,
-    required this.price,
-    required this.desc,
-  });
+  String? image;
+  String? name;
+  String? price;
+  String? desc;
+  DetailPage({this.image, this.name, this.price, this.desc});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
