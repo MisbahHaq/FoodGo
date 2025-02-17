@@ -66,6 +66,8 @@ class _DetailPageState extends State<DetailPage> {
                 GestureDetector(
                   onTap: () {
                     quantity = quantity + 1;
+                    totalprice = totalprice + int.parse(widget.price!);
+                    setState(() {});
                   },
                   child: Material(
                     elevation: 3,
@@ -81,7 +83,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
                 SizedBox(width: 20),
-                Text("1", style: AppWidget.HeadlineTextStyle()),
+                Text(quantity.toString(), style: AppWidget.HeadlineTextStyle()),
                 SizedBox(width: 20),
                 Material(
                   elevation: 3,
@@ -114,7 +116,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "\$50",
+                        "\$" + totalprice.toString(),
                         style: AppWidget.BoldWhiteTextStyle(),
                       ),
                     ),
