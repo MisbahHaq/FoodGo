@@ -1,6 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/Pages/home.dart';
+import 'package:foodgo/Pages/order.dart';
+import 'package:foodgo/Pages/profile.dart';
+import 'package:foodgo/Pages/wallet.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -12,7 +15,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int currentTabIndex = 0;
 
-  final List<Widget> pages = [Home(), Booking(), Profile()];
+  final List<Widget> pages = [Home(), OrderPage(), WalletPage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
