@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:foodgo/Model/burger_model.dart';
 import 'package:foodgo/Model/category_model.dart';
 import 'package:foodgo/Model/pizza_model.dart';
+import 'package:foodgo/Pages/detail_page.dart';
 import 'package:foodgo/Service/burger_data.dart';
 import 'package:foodgo/Service/category_data.dart';
 import 'package:foodgo/Service/pizza_data.dart';
 import 'package:foodgo/Service/widget_support.dart';
-
-import '../Constant Tiles/food_tile.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -159,6 +158,62 @@ class _HomeState extends State<Home> {
                 : Container(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget FoodTile(String name, String image, String price) {
+    return Container(
+      margin: EdgeInsets.only(right: 20),
+      padding: EdgeInsets.only(left: 10, top: 10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black38),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Image.asset(
+              image,
+              width: 150,
+              height: 150,
+              fit: BoxFit.contain,
+            ),
+          ),
+          Text(name, style: AppWidget.BoldTextStyle()),
+          Text("\$" + price, style: AppWidget.PriceTextStyle()),
+          Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DetailPage()),
+                  );
+                },
+                child: Container(
+                  height: 50,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: Color(0xffef2b39),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
