@@ -14,6 +14,7 @@ class _DetailPageState extends State<DetailPage> {
       body: Container(
         margin: EdgeInsets.only(top: 40, left: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
               onTap: () {
@@ -28,6 +29,7 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
+            Image.asset("assets/images/pizza1.png"),
           ],
         ),
       ),
