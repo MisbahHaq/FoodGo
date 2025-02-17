@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class DetailPage extends StatefulWidget {
-  String image, name, price, desc;
+  final String image;
+  final String name;
+  final String price;
+  final String desc;
   DetailPage({
     required this.image,
     required this.name,
@@ -39,21 +42,18 @@ class _DetailPageState extends State<DetailPage> {
             SizedBox(height: 10),
             Center(
               child: Image.asset(
-                "assets/images/pizza1.png",
+                widget.image!,
                 height: MediaQuery.of(context).size.height / 3,
                 fit: BoxFit.contain,
               ),
             ),
             SizedBox(height: 20),
-            Text("Cheese Pizza", style: AppWidget.HeadlineTextStyle()),
-            Text("\$50", style: AppWidget.PriceTextStyle()),
+            Text(widget.name!, style: AppWidget.HeadlineTextStyle()),
+            Text("\$" + widget.price!, style: AppWidget.PriceTextStyle()),
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: Text(
-                "Cheese pizza features a crispy crust topped with rich tomato sauce and melted mozzarella cheese, offering a deliciously smooth and savory flavor in every bite.",
-                style: AppWidget.SimpleTextStyle(),
-              ),
+              child: Text(widget.desc!, style: AppWidget.SimpleTextStyle()),
             ),
             SizedBox(height: 30),
             Text("Quantity", style: AppWidget.PriceTextStyle()),
