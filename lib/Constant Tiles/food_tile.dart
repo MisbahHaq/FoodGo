@@ -19,6 +19,7 @@ Widget FoodTile(String name, String image, String price) {
         ),
         Text(name, style: AppWidget.BoldTextStyle()),
         Text("\$" + price, style: AppWidget.PriceTextStyle()),
+        Spacer(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
