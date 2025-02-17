@@ -48,6 +48,16 @@ class _DetailPageState extends State<DetailPage> {
                 style: AppWidget.SimpleTextStyle(),
               ),
             ),
+            SizedBox(height: 30),
+            Text("Quantity", style: AppWidget.PriceTextStyle()),
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: Color(0xffef2b39),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(Icons.add, color: Colors.white, size: 30),
+            ),
           ],
         ),
       ),
