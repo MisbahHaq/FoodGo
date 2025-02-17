@@ -37,12 +37,16 @@ class _DetailPageState extends State<DetailPage> {
                 fit: BoxFit.contain,
               ),
             ),
+            SizedBox(height: 20),
             Text("Cheese Pizza", style: AppWidget.HeadlineTextStyle()),
             Text("\$50", style: AppWidget.PriceTextStyle()),
-            SizedBox(height: 20),
-            Text(
-              "Cheese pizza features a crispy crust topped with rich tomato sauce and melted mozzarella cheese, offering a deliciously smooth and savory flavor in every bite.",
-              style: AppWidget.SimpleTextStyle(),
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Text(
+                "Cheese pizza features a crispy crust topped with rich tomato sauce and melted mozzarella cheese, offering a deliciously smooth and savory flavor in every bite.",
+                style: AppWidget.SimpleTextStyle(),
+              ),
             ),
           ],
         ),
