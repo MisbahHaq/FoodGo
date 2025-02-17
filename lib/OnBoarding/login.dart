@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<Login> createState() => _LoginState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

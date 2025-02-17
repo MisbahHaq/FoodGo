@@ -61,4 +61,14 @@ class AppWidget {
       ),
     );
   }
+
+  static TextStyle SignUpTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+        color: const Color.fromARGB(174, 0, 0, 0),
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
 }
