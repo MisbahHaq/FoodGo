@@ -67,6 +67,20 @@ class _DetailPageState extends State<DetailPage> {
                 ),
                 SizedBox(width: 20),
                 Text("1", style: AppWidget.HeadlineTextStyle()),
+                SizedBox(width: 20),
+                Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Color(0xffef2b39),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(Icons.remove, color: Colors.white, size: 30),
+                  ),
+                ),
+                SizedBox(width: 20),
               ],
             ),
           ],
