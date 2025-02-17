@@ -13,7 +13,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 60, left: 20),
+        margin: EdgeInsets.only(top: 50, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -84,11 +84,46 @@ class _DetailPageState extends State<DetailPage> {
                 SizedBox(width: 20),
               ],
             ),
+            SizedBox(height: 40),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  decoration: BoxDecoration(color: Color(0xffef2b39)),
-                  child: Text("\$50", style: AppWidget.WhiteTextStyle()),
+                Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    height: 60,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: Color(0xffef2b39),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "\$50",
+                        style: AppWidget.BoldWhiteTextStyle(),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 30),
+                Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(
+                    height: 70,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Order Now",
+                        style: AppWidget.WhiteTextStyle(),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
