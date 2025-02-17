@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/Service/widget_support.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -36,6 +37,8 @@ class _DetailPageState extends State<DetailPage> {
                 fit: BoxFit.contain,
               ),
             ),
+            Text("Cheese Pizza", style: AppWidget.HeadlineTextStyle()),
+            Text("\$50", style: AppWidget.PriceTextStyle()),
           ],
         ),
       ),
