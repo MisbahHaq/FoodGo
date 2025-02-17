@@ -39,6 +39,10 @@ class _DetailPageState extends State<DetailPage> {
             ),
             Text("Cheese Pizza", style: AppWidget.HeadlineTextStyle()),
             Text("\$50", style: AppWidget.PriceTextStyle()),
+            SizedBox(height: 20),
+            Text(
+              "Cheese pizza features a crispy crust topped with rich tomato sauce and melted mozzarella cheese, offering a deliciously smooth and savory flavor in every bite.",
+            ),
           ],
         ),
       ),
