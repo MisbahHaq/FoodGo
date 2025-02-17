@@ -29,7 +29,13 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
-            Image.asset("assets/images/pizza1.png"),
+            Center(
+              child: Image.asset(
+                "assets/images/pizza1.png",
+                height: MediaQuery.of(context).size.height / 3,
+                fit: BoxFit.contain,
+              ),
+            ),
           ],
         ),
       ),
