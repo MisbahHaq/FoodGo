@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/Model/burger_model.dart';
 import 'package:foodgo/Model/category_model.dart';
 import 'package:foodgo/Model/pizza_model.dart';
+import 'package:foodgo/Service/burger_data.dart';
 import 'package:foodgo/Service/category_data.dart';
 import 'package:foodgo/Service/pizza_data.dart';
 import 'package:foodgo/Service/widget_support.dart';
@@ -17,11 +19,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
   List<PizzaModel> pizza = [];
+  List<BurgerModel> burger = [];
   String track = "0";
   @override
   void initState() {
     categories = getCategories();
     pizza = getPizza();
+    burger = getBurger();
     super.initState();
   }
 

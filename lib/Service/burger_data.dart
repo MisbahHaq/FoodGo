@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:foodgo/Model/burger_model.dart';
 import 'package:foodgo/Model/pizza_model.dart';
 
-List<BurgerModel> getPizza() {
+List<BurgerModel> getBurger() {
   List<BurgerModel> burger = [];
 
   BurgerModel burgerModel = new BurgerModel();
