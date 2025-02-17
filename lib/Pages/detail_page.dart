@@ -13,7 +13,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 40, left: 20),
+        margin: EdgeInsets.only(top: 60, left: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -30,6 +30,7 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Center(
               child: Image.asset(
                 "assets/images/pizza1.png",
