@@ -13,6 +13,14 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  int quantity = 1, totalprice = 0;
+
+  @override
+  void initState() {
+    totalprice = int.parse(widget.price!);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,16 +63,21 @@ class _DetailPageState extends State<DetailPage> {
             SizedBox(height: 10),
             Row(
               children: [
-                Material(
-                  elevation: 3,
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Color(0xffef2b39),
-                      borderRadius: BorderRadius.circular(10),
+                GestureDetector(
+                  onTap: () {
+                    quantity = quantity + 1;
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Color(0xffef2b39),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(Icons.add, color: Colors.white, size: 30),
                     ),
-                    child: Icon(Icons.add, color: Colors.white, size: 30),
                   ),
                 ),
                 SizedBox(width: 20),
