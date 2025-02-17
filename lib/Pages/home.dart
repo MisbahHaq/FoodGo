@@ -117,9 +117,9 @@ class _HomeState extends State<Home> {
                 padding: EdgeInsets.zero,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
+                  childAspectRatio: 0.69,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 15,
                 ),
                 itemCount: pizza.length,
                 itemBuilder: (context, index) {

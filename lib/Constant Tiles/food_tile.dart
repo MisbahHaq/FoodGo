@@ -5,7 +5,10 @@ Widget FoodTile(String name, String image, String price) {
   return Container(
     margin: EdgeInsets.only(right: 20),
     padding: EdgeInsets.only(left: 10, top: 10),
-    decoration: BoxDecoration(border: Border.all(color: Colors.black38)),
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.black38),
+      borderRadius: BorderRadius.circular(20),
+    ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,7 +31,10 @@ Widget FoodTile(String name, String image, String price) {
               width: 80,
               decoration: BoxDecoration(
                 color: Color(0xffef2b39),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(10),
+                ),
               ),
               child: Icon(
                 Icons.arrow_forward_ios_rounded,
