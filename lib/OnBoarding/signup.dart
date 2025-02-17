@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/OnBoarding/login.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class SignUp extends StatefulWidget {
@@ -148,7 +149,20 @@ class _SignUpState extends State<SignUp> {
                             style: AppWidget.SimpleTextStyle(),
                           ),
                           SizedBox(width: 10),
-                          Text("LogIn", style: AppWidget.BoldTextStyle()),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Login(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "LogIn",
+                              style: AppWidget.BoldTextStyle(),
+                            ),
+                          ),
                         ],
                       ),
                     ],

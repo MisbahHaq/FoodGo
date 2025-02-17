@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/OnBoarding/signup.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class Login extends StatefulWidget {
@@ -70,27 +71,11 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 20),
                       Center(
                         child: Text(
-                          "SignUp",
+                          "Login",
                           style: AppWidget.HeadlineTextStyle(),
                         ),
                       ),
                       SizedBox(height: 30),
-                      Text("Name", style: AppWidget.SignUpTextStyle()),
-                      SizedBox(height: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xffececf8),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Enter Name",
-                            prefixIcon: Icon(Icons.person_outline),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
                       Text("Email", style: AppWidget.SignUpTextStyle()),
                       SizedBox(height: 5),
                       Container(
@@ -122,7 +107,17 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Forgot Password",
+                            style: AppWidget.SimpleTextStyle(),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
                       Center(
                         child: Container(
                           width: 200,
@@ -133,7 +128,7 @@ class _LoginState extends State<Login> {
                           ),
                           child: Center(
                             child: Text(
-                              "Sign Up",
+                              "Login",
                               style: AppWidget.BoldWhiteTextStyle(),
                             ),
                           ),
@@ -144,11 +139,24 @@ class _LoginState extends State<Login> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Already have an account?",
+                            "Don't have an account?",
                             style: AppWidget.SimpleTextStyle(),
                           ),
                           SizedBox(width: 10),
-                          Text("LogIn", style: AppWidget.BoldTextStyle()),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUp(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "SignUp",
+                              style: AppWidget.BoldTextStyle(),
+                            ),
+                          ),
                         ],
                       ),
                     ],
