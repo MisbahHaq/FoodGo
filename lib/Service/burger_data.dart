@@ -10,6 +10,7 @@ List<BurgerModel> getBurger() {
   burgerModel.name = "Cheese Burger";
   burgerModel.image = "assets/images/burger1.png";
   burgerModel.price = "50";
+  burgerModel.desc = "";
   burger.add(burgerModel);
   burgerModel = new BurgerModel();
 
