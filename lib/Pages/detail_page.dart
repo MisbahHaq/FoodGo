@@ -87,9 +87,11 @@ class _DetailPageState extends State<DetailPage> {
                 SizedBox(width: 20),
                 GestureDetector(
                   onTap: () {
-                    quantity = quantity - 1;
-                    totalprice = totalprice - int.parse(widget.price!);
-                    setState(() {});
+                    if (quantity > 1) {
+                      quantity = quantity - 1;
+                      totalprice = totalprice - int.parse(widget.price!);
+                      setState(() {});
+                    }
                   },
                   child: Material(
                     elevation: 3,
