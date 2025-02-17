@@ -84,6 +84,14 @@ class _DetailPageState extends State<DetailPage> {
                 SizedBox(width: 20),
               ],
             ),
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(color: Color(0xffef2b39)),
+                  child: Text("\$50", style: AppWidget.WhiteTextStyle()),
+                ),
+              ],
+            ),
           ],
         ),
       ),

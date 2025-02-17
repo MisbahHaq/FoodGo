@@ -35,16 +35,30 @@ class AppWidget {
   static TextStyle BoldTextStyle() {
     return GoogleFonts.poppins(
       textStyle: TextStyle(
-          color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
+        color: Colors.black,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
   static TextStyle PriceTextStyle() {
     return GoogleFonts.poppins(
       textStyle: TextStyle(
-          color: const Color.fromARGB(174, 0, 0, 0),
-          fontSize: 24,
-          fontWeight: FontWeight.bold),
+        color: const Color.fromARGB(174, 0, 0, 0),
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  static TextStyle BoldWhiteTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }
