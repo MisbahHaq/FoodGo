@@ -26,7 +26,10 @@ Widget FoodTile(String name, String image, String price) {
             Container(
               height: 50,
               width: 80,
-              decoration: BoxDecoration(color: Color(0xffef2b39)),
+              decoration: BoxDecoration(
+                color: Color(0xffef2b39),
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30)),
+              ),
               child: Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white,
