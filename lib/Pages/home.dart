@@ -116,7 +116,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(height: 10),
-            Expanded(
+           track == "0" ? Expanded(
               child: GridView.builder(
                 padding: EdgeInsets.zero,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -134,7 +134,25 @@ class _HomeState extends State<Home> {
                   );
                 },
               ),
-            ),
+            ) :track =="1"?Expanded(
+              child: GridView.builder(
+                padding: EdgeInsets.zero,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.69,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 15,
+                ),
+                itemCount: burger.length,
+                itemBuilder: (context, index) {
+                  return FoodTile(
+                    burger[index].name!,
+                    burger[index].image!,
+                    burger[index].price!,
+                  );
+                },
+              ),
+            ): ,
           ],
         ),
       ),
