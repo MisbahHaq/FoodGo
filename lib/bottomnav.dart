@@ -20,14 +20,14 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: pages[currentTabIndex],
       bottomNavigationBar: Builder(
         builder: (BuildContext context) {
           return CurvedNavigationBar(
             index: currentTabIndex,
             backgroundColor: Colors.transparent,
-            color: Color.fromARGB(255, 204, 151, 7),
+            color: Colors.black,
             height: 60,
             animationDuration: Duration(milliseconds: 300),
             onTap: (int index) {
@@ -37,7 +37,8 @@ class _BottomNavState extends State<BottomNav> {
             },
             items: [
               Icon(Icons.home, color: Colors.white, size: 30),
-              Icon(Icons.book, color: Colors.white, size: 30),
+              Icon(Icons.shopping_bag_rounded, color: Colors.white, size: 30),
+              Icon(Icons.wallet_rounded, color: Colors.white, size: 30),
               Icon(Icons.person, color: Colors.white, size: 30),
             ],
           );
