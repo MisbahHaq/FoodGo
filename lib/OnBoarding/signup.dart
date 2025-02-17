@@ -15,7 +15,7 @@ class _SignUpState extends State<SignUp> {
         child: Stack(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height / 3.1,
+              height: MediaQuery.of(context).size.height / 2.5,
               padding: EdgeInsets.only(top: 50),
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -40,6 +40,28 @@ class _SignUpState extends State<SignUp> {
                     fit: BoxFit.cover,
                   ),
                 ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 3.2,
+                left: 20,
+                right: 20,
+              ),
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  height: MediaQuery.of(context).size.height / 1.5,
+                ),
               ),
             ),
           ],
