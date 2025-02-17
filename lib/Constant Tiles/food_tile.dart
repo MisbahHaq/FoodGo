@@ -17,31 +17,23 @@ Widget FoodTile(String name, String image, String price) {
             fit: BoxFit.contain,
           ),
         ),
-        Text(
-          name,
-          style: AppWidget.BoldTextStyle(),
-        ),
-        Text(
-          "\$" + price,
-          style: AppWidget.PriceTextStyle(),
-        ),
-        SizedBox(
-          height: 20,
-        ),
+        Text(name, style: AppWidget.BoldTextStyle()),
+        Text("\$" + price, style: AppWidget.PriceTextStyle()),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: Color(0xffef2b39),
-              ),
+              height: 50,
+              width: 80,
+              decoration: BoxDecoration(color: Color(0xffef2b39)),
               child: Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white,
+                size: 30,
               ),
             ),
           ],
-        )
+        ),
       ],
     ),
   );

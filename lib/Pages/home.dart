@@ -111,23 +111,26 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Expanded(
               child: GridView.builder(
-                  padding: EdgeInsets.zero,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.7,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10),
-                  itemCount: pizza.length,
-                  itemBuilder: (context, index) {
-                    return FoodTile(pizza[index].name!, pizza[index].image!,
-                        pizza[index].price!);
-                  }),
-            )
+                padding: EdgeInsets.zero,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.7,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemCount: pizza.length,
+                itemBuilder: (context, index) {
+                  return FoodTile(
+                    pizza[index].name!,
+                    pizza[index].image!,
+                    pizza[index].price!,
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -140,53 +143,54 @@ class _HomeState extends State<Home> {
         track = categoryindex.toString();
         setState(() {});
       },
-      child: track == categoryindex
-          ? Container(
-              margin: EdgeInsets.only(right: 20, bottom: 10),
-              child: Material(
-                elevation: 3,
-                borderRadius: BorderRadius.circular(30),
-                child: Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  decoration: BoxDecoration(
-                    color: Color(0xffef2b39),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        image,
-                        height: 40,
-                        width: 40,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(width: 10),
-                      Text(name, style: AppWidget.WhiteTextStyle()),
-                    ],
+      child:
+          track == categoryindex
+              ? Container(
+                margin: EdgeInsets.only(right: 20, bottom: 10),
+                child: Material(
+                  elevation: 3,
+                  borderRadius: BorderRadius.circular(30),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    decoration: BoxDecoration(
+                      color: Color(0xffef2b39),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          image,
+                          height: 40,
+                          width: 40,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(width: 10),
+                        Text(name, style: AppWidget.WhiteTextStyle()),
+                      ],
+                    ),
                   ),
                 ),
+              )
+              : Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                margin: EdgeInsets.only(right: 20, bottom: 10),
+                decoration: BoxDecoration(
+                  color: Color(0xffececf8),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      image,
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(width: 10),
+                    Text(name, style: AppWidget.SimpleTextStyle()),
+                  ],
+                ),
               ),
-            )
-          : Container(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              margin: EdgeInsets.only(right: 20, bottom: 10),
-              decoration: BoxDecoration(
-                color: Color(0xffececf8),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                children: [
-                  Image.asset(
-                    image,
-                    height: 40,
-                    width: 40,
-                    fit: BoxFit.cover,
-                  ),
-                  SizedBox(width: 10),
-                  Text(name, style: AppWidget.SimpleTextStyle()),
-                ],
-              ),
-            ),
     );
   }
 }
