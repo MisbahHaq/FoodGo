@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/OnBoarding/signup.dart';
 import 'package:foodgo/Service/widget_support.dart';
+import 'package:foodgo/bottomnav.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -10,6 +13,44 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  String email = "", password = "", name = "";
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController mailController = new TextEditingController();
+
+  userLogin() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email!,
+        password: password!,
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => BottomNav()),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "No User Found fot that Email",
+              style: TextStyle(fontSize: 18, color: Colors.black),
+            ),
+          ),
+        );
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Wrong Password Provided by User",
+              style: TextStyle(fontSize: 18, color: Colors.black),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,6 +127,7 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            controller: mailController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Enter Email",
@@ -102,6 +144,8 @@ class _LoginState extends State<Login> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            obscureText: true,
+                            controller: passwordController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Enter Password",
@@ -120,18 +164,30 @@ class _LoginState extends State<Login> {
                           ],
                         ),
                         SizedBox(height: 20),
-                        Center(
-                          child: Container(
-                            width: 200,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Color(0xffef2b39),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Login",
-                                style: AppWidget.BoldWhiteTextStyle(),
+                        GestureDetector(
+                          onTap: () {
+                            if (mailController.text != "" &&
+                                passwordController.text != "") {
+                              setState(() {
+                                email = mailController.text;
+                                password = passwordController.text;
+                              });
+                              userLogin();
+                            }
+                          },
+                          child: Center(
+                            child: Container(
+                              width: 200,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Color(0xffef2b39),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Login",
+                                  style: AppWidget.BoldWhiteTextStyle(),
+                                ),
                               ),
                             ),
                           ),

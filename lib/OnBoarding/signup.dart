@@ -191,6 +191,7 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            obscureText: true,
                             controller: passwordController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
