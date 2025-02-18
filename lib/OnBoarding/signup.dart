@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/OnBoarding/login.dart';
+import 'package:foodgo/Pages/home.dart';
+import 'package:foodgo/Service/database.dart';
+import 'package:foodgo/Service/shared_pref.dart';
 import 'package:foodgo/Service/widget_support.dart';
+import 'package:foodgo/bottomnav.dart';
 import 'package:random_string/random_string.dart';
 
 class SignUp extends StatefulWidget {
@@ -32,6 +36,25 @@ class _SignUpState extends State<SignUp> {
           "Email": mailController.text,
           "Id": Id,
         };
+        await SharedpreferencesHelper().saveUserEmail(email);
+        await SharedpreferencesHelper().saveUserDisplayName(
+          nameController.text,
+        );
+
+        await DatabaseMethods().addUserDetails(userInfoMap, Id);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.green,
+            content: Text(
+              "Registered Sucessfully!",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BottomNav()),
+        );
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -134,6 +157,7 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            controller: nameController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Enter Name",
@@ -150,6 +174,7 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            controller: mailController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Enter Email",
@@ -166,6 +191,7 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            controller: passwordController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Enter Password",
@@ -174,18 +200,32 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         SizedBox(height: 30),
-                        Center(
-                          child: Container(
-                            width: 200,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: Color(0xffef2b39),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Sign Up",
-                                style: AppWidget.BoldWhiteTextStyle(),
+                        GestureDetector(
+                          onTap: () {
+                            if (nameController.text != "" &&
+                                mailController.text != "" &&
+                                passwordController.text != "") {
+                              setState(() {
+                                name = nameController.text;
+                                email = mailController.text;
+                                password = passwordController.text;
+                              });
+                              registration();
+                            }
+                          },
+                          child: Center(
+                            child: Container(
+                              width: 200,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Color(0xffef2b39),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Sign Up",
+                                  style: AppWidget.BoldWhiteTextStyle(),
+                                ),
                               ),
                             ),
                           ),
