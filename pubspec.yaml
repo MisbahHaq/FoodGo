@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
   curved_navigation_bar: ^1.0.6
+  cloud_firestore: ^5.6.3
+  firebase_core: ^3.11.0
+  firebase_auth: ^5.4.2
+  random_string: ^2.3.1
 
 dev_dependencies:
   flutter_test:

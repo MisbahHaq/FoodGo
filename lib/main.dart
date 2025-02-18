@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/OnBoarding/login.dart';
 import 'package:foodgo/OnBoarding/signup.dart';
@@ -6,7 +7,9 @@ import 'package:foodgo/Pages/home.dart';
 import 'package:foodgo/Pages/onBoarding.dart';
 import 'package:foodgo/bottomnav.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

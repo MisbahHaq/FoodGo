@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/OnBoarding/login.dart';
 import 'package:foodgo/Service/widget_support.dart';
@@ -10,6 +11,44 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  String email = "", password = "", name = "";
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController mailController = new TextEditingController();
+
+  registration() async {
+    if (password != null &&
+        nameController.text != "" &&
+        mailController.text != "") {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Password Provided is too Weak",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          );
+        } else if (e.code == "email-already-in-use") {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Account Already Exists",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          );
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
