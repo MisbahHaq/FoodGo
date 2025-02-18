@@ -46,7 +46,7 @@ class _SignUpState extends State<SignUp> {
           SnackBar(
             backgroundColor: Colors.green,
             content: Text(
-              "Registered Sucessfully!",
+              "Registered Successfully!",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
