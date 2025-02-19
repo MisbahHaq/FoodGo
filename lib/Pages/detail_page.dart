@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:foodgo/Service/keys.dart';
+import 'package:foodgo/Service/shared_pref.dart';
 import 'package:foodgo/Service/widget_support.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailPage extends StatefulWidget {
   String? image;
   String? name;
   String? price;
   String? desc;
+
   DetailPage({this.image, this.name, this.price, this.desc});
 
   @override
@@ -13,11 +21,28 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  Map<String, dynamic>? paymentIntent;
+  String? name, id, email;
   int quantity = 1, totalprice = 0;
+
+  getthesharedpref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    name = prefs.getString(SharedpreferencesHelper.userNameKey);
+    id = prefs.getString(SharedpreferencesHelper.userIdKey);
+    email = prefs.getString(SharedpreferencesHelper.userEmailKey);
+
+    if (name == null || id == null || email == null) {
+      print("Error: User data not found in SharedPreferences.");
+    }
+
+    setState(() {});
+  }
 
   @override
   void initState() {
     totalprice = int.parse(widget.price!);
+    getthesharedpref();
     super.initState();
   }
 
@@ -132,20 +157,25 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ),
                 SizedBox(width: 30),
-                Material(
-                  elevation: 3,
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    height: 70,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Order Now",
-                        style: AppWidget.WhiteTextStyle(),
+                GestureDetector(
+                  onTap: () {
+                    makePayment(totalprice.toString());
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      height: 70,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Order Now",
+                          style: AppWidget.WhiteTextStyle(),
+                        ),
                       ),
                     ),
                   ),
@@ -156,5 +186,104 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
     );
+  }
+
+  calculateAmount(String amount) {
+    return (double.parse(amount) * 100).toStringAsFixed(0);
+  }
+
+  Future<void> makePayment(String amount) async {
+    try {
+      paymentIntent = await createPaymentIntent(amount, 'PKR ');
+
+      await Stripe.instance
+          .initPaymentSheet(
+            paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret: paymentIntent?['client_secret'],
+              style: ThemeMode.dark,
+              merchantDisplayName: "Misbah",
+            ),
+          )
+          .then((value) {});
+
+      displayPaymentSheet(amount);
+    } catch (e) {
+      print('Error creating payment sheet: $e');
+    }
+  }
+
+  displayPaymentSheet(String amount) async {
+    try {
+      await Stripe.instance
+          .presentPaymentSheet()
+          .then((value) async {
+            Map<String, dynamic> userOrderMap = {
+              "Name": name,
+              "Id": id,
+              "Quantity": quantity.toString(),
+              "Total": totalprice.toString(),
+              "Email": email,
+              "FoodName": widget.name,
+              "FoodImage": widget.image,
+              "Status": "Pending",
+            };
+
+            showDialog(
+              context: context,
+              builder:
+                  (_) => AlertDialog(
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.check_circle_rounded,
+                              color: Colors.green,
+                            ),
+                            Text("Payment Successful"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+            );
+            paymentIntent = null;
+          })
+          .onError((error, StackTrace) {
+            print("Error is: $error $StackTrace");
+          });
+    } on StripeException catch (e) {
+      print("Error is: $e");
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(content: Text("Payment cancelled")),
+      );
+    } catch (e) {
+      print("$e");
+    }
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': calculateAmount(amount),
+        'currency': currency,
+        'payment_method_types[]': 'card',
+      };
+
+      var response = await http.post(
+        Uri.parse("https://api.stripe.com/v1/payment_intents"),
+        headers: {
+          'Authorization': 'Bearer $secretkey',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: body,
+      );
+
+      return jsonDecode(response.body);
+    } catch (err) {
+      print('Error charging user: ${err.toString()}');
+    }
   }
 }
