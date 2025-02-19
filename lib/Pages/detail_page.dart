@@ -79,7 +79,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
             SizedBox(height: 20),
             Text(widget.name!, style: AppWidget.HeadlineTextStyle()),
-            Text("\$" + widget.price!, style: AppWidget.PriceTextStyle()),
+            Text("Rs " + widget.price!, style: AppWidget.PriceTextStyle()),
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.only(right: 10),
@@ -152,7 +152,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                     child: Center(
                       child: Text(
-                        "\$" + totalprice.toString(),
+                        "Rs " + totalprice.toString(),
                         style: AppWidget.BoldWhiteTextStyle(),
                       ),
                     ),

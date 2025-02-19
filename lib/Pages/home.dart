@@ -184,7 +184,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Text(name, style: AppWidget.BoldTextStyle()),
-          Text("\$" + price, style: AppWidget.PriceTextStyle()),
+          Text("Rs " + price, style: AppWidget.PriceTextStyle()),
           Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
