@@ -40,6 +40,7 @@ class _SignUpState extends State<SignUp> {
         await SharedpreferencesHelper().saveUserDisplayName(
           nameController.text,
         );
+        await SharedpreferencesHelper().saveUserId(Id);
 
         await DatabaseMethods().addUserDetails(userInfoMap, Id);
         ScaffoldMessenger.of(context).showSnackBar(

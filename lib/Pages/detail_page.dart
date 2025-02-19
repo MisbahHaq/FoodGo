@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:foodgo/Service/database.dart';
 import 'package:foodgo/Service/keys.dart';
 import 'package:foodgo/Service/shared_pref.dart';
 import 'package:foodgo/Service/widget_support.dart';
 import 'package:http/http.dart' as http;
+import 'package:random_string/random_string.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -159,6 +161,7 @@ class _DetailPageState extends State<DetailPage> {
                 SizedBox(width: 30),
                 GestureDetector(
                   onTap: () {
+                    print("Order Now pressed");
                     makePayment(totalprice.toString());
                   },
                   child: Material(
@@ -194,7 +197,7 @@ class _DetailPageState extends State<DetailPage> {
 
   Future<void> makePayment(String amount) async {
     try {
-      paymentIntent = await createPaymentIntent(amount, 'PKR ');
+      paymentIntent = await createPaymentIntent(amount, 'pkr');
 
       await Stripe.instance
           .initPaymentSheet(
@@ -217,6 +220,7 @@ class _DetailPageState extends State<DetailPage> {
       await Stripe.instance
           .presentPaymentSheet()
           .then((value) async {
+            String orderId = randomAlphaNumeric(10);
             Map<String, dynamic> userOrderMap = {
               "Name": name,
               "Id": id,
@@ -225,8 +229,26 @@ class _DetailPageState extends State<DetailPage> {
               "Email": email,
               "FoodName": widget.name,
               "FoodImage": widget.image,
+              "OrderId": orderId,
               "Status": "Pending",
             };
+
+            await DatabaseMethods().addUserOrderDetails(
+              userOrderMap,
+              id!,
+              orderId,
+            );
+
+            await DatabaseMethods().addAdminOrderDetails(userOrderMap, orderId);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.green,
+                content: Text(
+                  "Order Placed Successfully!",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            );
 
             showDialog(
               context: context,
@@ -272,6 +294,18 @@ class _DetailPageState extends State<DetailPage> {
         'payment_method_types[]': 'card',
       };
 
+      //  var response = await Dio().post(
+      //   "https://api.stripe.com/v1/payment_intents",
+      //   options: Options(
+      //     headers: {
+      //       "Authorization":
+      //           "Bearer sk_test_51QncxuCAliKk3oIwU0HffumCHOkugIp6zuF8lPCcjgh28LeUAoNLn0JfXDKCOhPqKNQ3VLByxmyRY2vi5aWQzKuf00ZdwEjtdK",
+      //       "Content-Type": 'application/x-www-form-urlencoded',
+      //     },
+      //   ),
+      //   data: body,
+      // );
+
       var response = await http.post(
         Uri.parse("https://api.stripe.com/v1/payment_intents"),
         headers: {
@@ -280,7 +314,7 @@ class _DetailPageState extends State<DetailPage> {
         },
         body: body,
       );
-
+      print("Payment Intent Response: ${response.body}");
       return jsonDecode(response.body);
     } catch (err) {
       print('Error charging user: ${err.toString()}');
