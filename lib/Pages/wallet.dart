@@ -54,10 +54,37 @@ class _WalletPageState extends State<WalletPage> {
                                 width: 80,
                                 fit: BoxFit.contain,
                               ),
+                              SizedBox(width: 60),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Your Wallet",
+                                    style: AppWidget.SimpleTextStyle(),
+                                  ),
+                                  Text(
+                                    "Rs 0.00",
+                                    style: AppWidget.HeadlineTextStyle(),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(height: 40),
+                    Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Text(
+                            "Rs100",
+                            style: AppWidget.PriceTextStyle(),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
