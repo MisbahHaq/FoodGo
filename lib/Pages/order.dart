@@ -9,10 +9,11 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
+  Stream? orderStream;
 
 
   Widget allOrders() {
-    return StreamBuilder(stream: stream, builder: builder)
+    return StreamBuilder(stream: orderStream, builder: builder)
   }
 
 
