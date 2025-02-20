@@ -98,6 +98,16 @@ class _OrderPageState extends State<OrderPage> {
                                             "4",
                                             style: AppWidget.BoldTextStyle(),
                                           ),
+                                          SizedBox(width: 30),
+                                          Icon(
+                                            Icons.monetization_on_rounded,
+                                            color: Color(0xffef2b39),
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            "Rs 2240",
+                                            style: AppWidget.BoldTextStyle(),
+                                          ),
                                         ],
                                       ),
                                     ],
