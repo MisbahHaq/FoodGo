@@ -18,7 +18,7 @@ class _OrderPageState extends State<OrderPage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text("Booking", style: AppWidget.HeadlineTextStyle())],
+              children: [Text("Orders", style: AppWidget.HeadlineTextStyle())],
             ),
           ],
         ),
