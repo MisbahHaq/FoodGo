@@ -20,6 +20,10 @@ class _OrderPageState extends State<OrderPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [Text("Orders", style: AppWidget.HeadlineTextStyle())],
             ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(color: Color(0xffececf8)),
+            ),
           ],
         ),
       ),
