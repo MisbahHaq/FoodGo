@@ -20,6 +20,7 @@ class _OrderPageState extends State<OrderPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [Text("Orders", style: AppWidget.HeadlineTextStyle())],
             ),
+            SizedBox(height: 10),
             Container(
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -31,6 +32,7 @@ class _OrderPageState extends State<OrderPage> {
               ),
               child: Column(
                 children: [
+                  SizedBox(height: 20),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(color: Colors.white),
