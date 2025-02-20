@@ -167,7 +167,7 @@ class _OrderPageState extends State<OrderPage> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
+                    SizedBox(height: 21),
                     Container(
                       height: MediaQuery.of(context).size.height / 1.5,
                       child: allOrders(),
