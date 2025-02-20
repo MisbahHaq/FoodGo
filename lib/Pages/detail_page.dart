@@ -241,16 +241,21 @@ class _DetailPageState extends State<DetailPage> {
                       controller: addresscontroller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Address",
+                        hintText: "Enter Address",
                       ),
                     ),
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: () async {
+                      // Save the address entered by the user
                       await SharedpreferencesHelper().saveUserAddress(
-                        SharedpreferencesHelper.userAddressKey,
+                        addresscontroller.text,
                       );
+                      // Update the address in the current state
+                      setState(() {
+                        address = addresscontroller.text;
+                      });
                       Navigator.pop(context);
                     },
                     child: Center(
@@ -379,18 +384,6 @@ class _DetailPageState extends State<DetailPage> {
         'currency': currency,
         'payment_method_types[]': 'card',
       };
-
-      //  var response = await Dio().post(
-      //   "https://api.stripe.com/v1/payment_intents",
-      //   options: Options(
-      //     headers: {
-      //       "Authorization":
-      //           "Bearer sk_test_51QncxuCAliKk3oIwU0HffumCHOkugIp6zuF8lPCcjgh28LeUAoNLn0JfXDKCOhPqKNQ3VLByxmyRY2vi5aWQzKuf00ZdwEjtdK",
-      //       "Content-Type": 'application/x-www-form-urlencoded',
-      //     },
-      //   ),
-      //   data: body,
-      // );
 
       var response = await http.post(
         Uri.parse("https://api.stripe.com/v1/payment_intents"),
