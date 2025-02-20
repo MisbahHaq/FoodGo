@@ -7,7 +7,6 @@ import 'package:foodgo/Service/widget_support.dart';
 import 'package:http/http.dart' as http;
 import 'package:random_string/random_string.dart';
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailPage extends StatefulWidget {
@@ -163,10 +162,13 @@ class _DetailPageState extends State<DetailPage> {
                 SizedBox(width: 30),
                 GestureDetector(
                   onTap: () {
+                    print("Checking address...");
                     if (address == null) {
+                      print("No address found, opening address box...");
                       openBox();
                     } else {
-                      print("Order Now pressed");
+                      print("Address exists: $address");
+                      print("Order Now pressed, proceeding to payment...");
                       makePayment(totalprice.toString());
                     }
                   },
@@ -248,11 +250,10 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: () async {
-                      // Save the address entered by the user
+                      print("Saving address: ${addresscontroller.text}");
                       await SharedpreferencesHelper().saveUserAddress(
                         addresscontroller.text,
                       );
-                      // Update the address in the current state
                       setState(() {
                         address = addresscontroller.text;
                       });
@@ -287,7 +288,9 @@ class _DetailPageState extends State<DetailPage> {
 
   Future<void> makePayment(String amount) async {
     try {
+      print("Creating payment intent...");
       paymentIntent = await createPaymentIntent(amount, 'pkr');
+      print("Payment Intent created: $paymentIntent");
 
       await Stripe.instance
           .initPaymentSheet(
@@ -311,6 +314,8 @@ class _DetailPageState extends State<DetailPage> {
           .presentPaymentSheet()
           .then((value) async {
             String orderId = randomAlphaNumeric(10);
+            print("Payment Successful, Order ID: $orderId");
+
             Map<String, dynamic> userOrderMap = {
               "Name": name,
               "Id": id,
@@ -367,13 +372,13 @@ class _DetailPageState extends State<DetailPage> {
             print("Error is: $error $StackTrace");
           });
     } on StripeException catch (e) {
-      print("Error is: $e");
+      print("Stripe Error is: $e");
       showDialog(
         context: context,
         builder: (_) => AlertDialog(content: Text("Payment cancelled")),
       );
     } catch (e) {
-      print("$e");
+      print("Error is: $e");
     }
   }
 
