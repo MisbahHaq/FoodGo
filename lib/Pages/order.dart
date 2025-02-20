@@ -13,9 +13,11 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        margin: EdgeInsets.only(top: 40),
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [Text("Booking", style: AppWidget.HeadlineTextStyle())],
             ),
           ],
