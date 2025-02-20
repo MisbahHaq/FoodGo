@@ -35,17 +35,23 @@ class _WalletPageState extends State<WalletPage> {
                   children: [
                     SizedBox(height: 20),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(color: Colors.white),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/images/wallet.png",
-                            height: 50,
-                            width: 50,
-                            fit: BoxFit.contain,
+                      margin: EdgeInsets.only(left: 20, right: 20),
+                      child: Material(
+                        elevation: 3,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/wallet.png",
+                                height: 80,
+                                width: 80,
+                                fit: BoxFit.contain,
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
