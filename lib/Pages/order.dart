@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/Service/widget_support.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
@@ -10,6 +11,16 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [
+            Row(
+              children: [Text("Booking", style: AppWidget.HeadlineTextStyle())],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
