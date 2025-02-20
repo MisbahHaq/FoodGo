@@ -22,7 +22,13 @@ class _OrderPageState extends State<OrderPage> {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(color: Color(0xffececf8)),
+              decoration: BoxDecoration(
+                color: Color(0xffececf8),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
             ),
           ],
         ),
