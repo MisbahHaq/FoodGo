@@ -23,8 +23,9 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  TextEditingController addresscontroller = new TextEditingController();
   Map<String, dynamic>? paymentIntent;
-  String? name, id, email;
+  String? name, id, email, address;
   int quantity = 1, totalprice = 0;
 
   getthesharedpref() async {
@@ -33,6 +34,7 @@ class _DetailPageState extends State<DetailPage> {
     name = prefs.getString(SharedpreferencesHelper.userNameKey);
     id = prefs.getString(SharedpreferencesHelper.userIdKey);
     email = prefs.getString(SharedpreferencesHelper.userEmailKey);
+    address = prefs.getString(SharedpreferencesHelper.userAddressKey);
 
     if (name == null || id == null || email == null) {
       print("Error: User data not found in SharedPreferences.");
@@ -161,8 +163,12 @@ class _DetailPageState extends State<DetailPage> {
                 SizedBox(width: 30),
                 GestureDetector(
                   onTap: () {
-                    print("Order Now pressed");
-                    makePayment(totalprice.toString());
+                    if (address == null) {
+                      openBox();
+                    } else {
+                      print("Order Now pressed");
+                      makePayment(totalprice.toString());
+                    }
                   },
                   child: Material(
                     elevation: 3,
@@ -194,6 +200,85 @@ class _DetailPageState extends State<DetailPage> {
   calculateAmount(String amount) {
     return (double.parse(amount) * 100).toStringAsFixed(0);
   }
+
+  Future openBox() => showDialog(
+    context: context,
+    builder:
+        (context) => AlertDialog(
+          content: SingleChildScrollView(
+            child: Container(
+              constraints: BoxConstraints(maxHeight: 200),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.cancel),
+                      ),
+                      SizedBox(width: 30),
+                      Text(
+                        "Add the Address",
+                        style: TextStyle(
+                          color: Color(0xff008080),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      controller: addresscontroller,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Address",
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () async {
+                      await SharedpreferencesHelper().saveUserAddress(
+                        SharedpreferencesHelper.userAddressKey,
+                      );
+                      Navigator.pop(context);
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 100,
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Color(0xff008080),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Add",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+  );
 
   Future<void> makePayment(String amount) async {
     try {
@@ -231,6 +316,7 @@ class _DetailPageState extends State<DetailPage> {
               "FoodImage": widget.image,
               "OrderId": orderId,
               "Status": "Pending",
+              "Address": address == null ? addresscontroller.text : address,
             };
 
             await DatabaseMethods().addUserOrderDetails(

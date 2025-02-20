@@ -39,44 +39,43 @@ class SharedpreferencesHelper {
   static String userNameKey = "USERNAMEKEY";
   static String userEmailKey = "USEREMAILKEY";
   static String userImageKey = "USERIMAGEKEY";
+  static String userAddressKey = "USERADDRESSKEY";
 
-  // Save User ID
   Future<bool> saveUserId(String getUserId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString(userIdKey, getUserId);
   }
 
-  // Get User Display Name
+  Future<bool> saveUserAddress(String getUserAddress) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(userAddressKey, getUserAddress);
+  }
+
   Future<String?> getUserDisplayName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(userNameKey);
   }
 
-  // Save User Display Name
   Future<bool> saveUserDisplayName(String getUserName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString(userNameKey, getUserName);
   }
 
-  // Save User Email
   Future<bool> saveUserEmail(String getUserEmail) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString(userEmailKey, getUserEmail);
   }
 
-  // Save User Image URL
   Future<bool> saveUserImage(String getUserImage) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString(userImageKey, getUserImage);
   }
 
-  // Helper function to handle null checks for userName
   Future<String> getUserDisplayNameOrDefault() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(userNameKey) ?? "Guest"; // Default "Guest" if null
+    return prefs.getString(userNameKey) ?? "Guest";
   }
 
-  // Helper function to check if the user is logged in by verifying if userId exists
   Future<bool> isUserLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.containsKey(userIdKey);
