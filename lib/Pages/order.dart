@@ -87,6 +87,7 @@ class _OrderPageState extends State<OrderPage> {
                                         "Cheese Burger",
                                         style: AppWidget.BoldTextStyle(),
                                       ),
+                                      SizedBox(height: 10),
                                       Row(
                                         children: [
                                           Icon(
@@ -109,6 +110,15 @@ class _OrderPageState extends State<OrderPage> {
                                             style: AppWidget.BoldTextStyle(),
                                           ),
                                         ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Pending",
+                                        style: TextStyle(
+                                          color: Color(0xffef2b39),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ],
                                   ),
