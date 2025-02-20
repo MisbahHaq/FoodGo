@@ -70,12 +70,22 @@ class _OrderPageState extends State<OrderPage> {
                               ),
                               Divider(),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Image.asset(
                                     "assets/images/burger1.png",
                                     height: 120,
                                     width: 120,
                                     fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(width: 20),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "Cheese Burger",
+                                        style: AppWidget.BoldTextStyle(),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
