@@ -57,11 +57,11 @@ List<MexicanModel> getMexican() {
   mexican.add(mexicanModel);
   mexicanModel = new MexicanModel();
 
-  mexicanModel.name = "Noodles Grilled Mushrooms";
-  mexicanModel.image = "assets/images/noodlesgrilledmushrooms.png";
-  mexicanModel.price = "1250";
+  mexicanModel.name = "LOADED SRIRACHA FRIES";
+  mexicanModel.image = "assets/images/SRIRACHA.png";
+  mexicanModel.price = "370";
   mexicanModel.desc =
-      "Veggie Pizza features a crispy crust topped with rich tomato sauce, melted cheese, and a colorful mix of fresh vegetables for a flavorful and wholesome bite.";
+      "French Fries Loaded with Sriracha Mayo, Jalapeños, Salsa Verde, Cherry Tomatoes, Parmesan Shavings & a Dash of Truffle Oil";
   mexican.add(mexicanModel);
   mexicanModel = new MexicanModel();
 
