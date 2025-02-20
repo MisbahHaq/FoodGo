@@ -37,10 +37,15 @@ class _WalletPageState extends State<WalletPage> {
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20),
                       child: Material(
+                        borderRadius: BorderRadius.circular(10),
                         elevation: 3,
                         child: Container(
+                          padding: EdgeInsets.all(20),
                           width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(color: Colors.white),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           child: Row(
                             children: [
                               Image.asset(
