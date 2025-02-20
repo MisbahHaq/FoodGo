@@ -77,17 +77,58 @@ class _WalletPageState extends State<WalletPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
                             height: 50,
                             width: 100,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border: Border.all(color: Colors.black45),
+                              border: Border.all(
+                                color: Colors.black45,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
                               child: Text(
                                 "Rs100",
+                                style: AppWidget.PriceTextStyle(),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Colors.black45,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Rs50",
+                                style: AppWidget.PriceTextStyle(),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: 50,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Colors.black45,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Rs200",
                                 style: AppWidget.PriceTextStyle(),
                               ),
                             ),
