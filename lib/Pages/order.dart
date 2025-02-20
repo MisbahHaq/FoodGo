@@ -29,9 +29,24 @@ class _OrderPageState extends State<OrderPage> {
                   topRight: Radius.circular(30),
                 ),
               ),
-              child: Column(children: [
-                
-              ],),
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "assets/images/burger1.png",
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
