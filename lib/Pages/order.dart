@@ -38,13 +38,29 @@ class _OrderPageState extends State<OrderPage> {
                       margin: EdgeInsets.only(left: 20, right: 20),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(color: Colors.white),
-                      child: Row(
+                      child: Column(
                         children: [
-                          Image.asset(
-                            "assets/images/burger1.png",
-                            height: 120,
-                            width: 120,
-                            fit: BoxFit.cover,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.location_on_rounded,
+                                color: Color(0xffef2b39),
+                              ),
+                              Text(
+                                "Gulshan e Iqbal",
+                                style: AppWidget.SimpleTextStyle(),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/burger1.png",
+                                height: 120,
+                                width: 120,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
                           ),
                         ],
                       ),
