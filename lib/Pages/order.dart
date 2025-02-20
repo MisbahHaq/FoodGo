@@ -80,10 +80,20 @@ class _OrderPageState extends State<OrderPage> {
                                   ),
                                   SizedBox(width: 20),
                                   Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "Cheese Burger",
                                         style: AppWidget.BoldTextStyle(),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.shopping_cart,
+                                            color: Color(0xffef2b39),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
