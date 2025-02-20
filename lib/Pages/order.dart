@@ -36,43 +36,52 @@ class _OrderPageState extends State<OrderPage> {
                     SizedBox(height: 20),
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
+                      child: Material(
+                        elevation: 3,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10),
                         ),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                          ),
+                          child: Column(
                             children: [
-                              Icon(
-                                Icons.location_on_rounded,
-                                color: Color(0xffef2b39),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.location_on_rounded,
+                                    color: Color(0xffef2b39),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    "Gulshan e Iqbal",
+                                    style: AppWidget.SimpleTextStyle(),
+                                  ),
+                                ],
                               ),
-                              SizedBox(width: 10),
-                              Text(
-                                "Gulshan e Iqbal",
-                                style: AppWidget.SimpleTextStyle(),
+                              Divider(),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/burger1.png",
+                                    height: 120,
+                                    width: 120,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                          Divider(),
-                          Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/burger1.png",
-                                height: 120,
-                                width: 120,
-                                fit: BoxFit.cover,
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
