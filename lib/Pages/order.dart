@@ -9,6 +9,18 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
+
+
+  Widget allOrders() {
+    return StreamBuilder(stream: stream, builder: builder)
+  }
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
