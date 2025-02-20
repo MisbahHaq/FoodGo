@@ -64,13 +64,12 @@ class _OrderPageState extends State<OrderPage> {
                                   SizedBox(width: 10),
                                   Text(
                                     "Gulshan e Iqbal",
-                                    style: AppWidget.SimpleTextStyle(),
+                                    style: AppWidget.BoldTextStyle(),
                                   ),
                                 ],
                               ),
                               Divider(),
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Image.asset(
                                     "assets/images/burger1.png",
@@ -85,7 +84,7 @@ class _OrderPageState extends State<OrderPage> {
                                     children: [
                                       Text(
                                         "Cheese Burger",
-                                        style: AppWidget.BoldTextStyle(),
+                                        style: AppWidget.FoodOrderTextStyle(),
                                       ),
                                       SizedBox(height: 10),
                                       Row(
