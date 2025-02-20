@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
@@ -11,16 +12,21 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   Stream? orderStream;
 
-
   Widget allOrders() {
-    return StreamBuilder(stream: orderStream, builder: builder)
+    return StreamBuilder(
+      stream: orderStream,
+      builder: (context, AsyncSnapshot snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+              itemCount: snapshot.data.docs.lenght,
+              itemBuilder: (context, index) {
+                DocumentSnapshot ds = snapshot.data.docs[index];
+              },
+            )
+            : Container();
+      },
+    );
   }
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
