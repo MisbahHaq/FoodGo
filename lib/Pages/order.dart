@@ -93,6 +93,11 @@ class _OrderPageState extends State<OrderPage> {
                                             Icons.shopping_cart,
                                             color: Color(0xffef2b39),
                                           ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            "4",
+                                            style: AppWidget.BoldTextStyle(),
+                                          ),
                                         ],
                                       ),
                                     ],
