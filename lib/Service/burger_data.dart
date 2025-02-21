@@ -31,11 +31,11 @@ List<BurgerModel> getBurger() {
   burger.add(burgerModel);
   burgerModel = new BurgerModel();
 
-  burgerModel.name = "Veggie Pizza";
-  burgerModel.image = "assets/images/burger2.png";
-  burgerModel.price = "450";
+  burgerModel.name = "Big Mac";
+  burgerModel.image = "assets/images/big mac.png";
+  burgerModel.price = "850";
   burgerModel.desc =
-      "Veggie Pizza features a crispy crust topped with rich tomato sauce, melted cheese, and a colorful mix of fresh vegetables for a flavorful and wholesome bite.";
+      "A juicy, seasoned patty is the star of this burger, paired with fresh toppings like lettuce, tomatoes, onions, and pickles, all nestled in a soft, toasted bun for a rich and satisfying bite. Perfect for those craving a hearty, savory meal.";
   burger.add(burgerModel);
   burgerModel = new BurgerModel();
 
