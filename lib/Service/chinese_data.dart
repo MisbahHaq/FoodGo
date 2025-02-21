@@ -25,7 +25,7 @@ List<ChineseModel> getChinese() {
   chineseModel = new ChineseModel();
 
   chineseModel.name = "Ceviche";
-  chineseModel.image = "assets/images/ceviche-.png";
+  chineseModel.image = "assets/images/ceviche.png";
   chineseModel.price = "550";
   chineseModel.desc =
       "Fresh fish or seafood marinated in zesty lime juice, mixed with vibrant tomatoes, onions, cilantro, and a touch of chili. A refreshing and tangy dish, perfect as a light appetizer or a refreshing snack.";
@@ -33,7 +33,7 @@ List<ChineseModel> getChinese() {
   chineseModel = new ChineseModel();
 
   chineseModel.name = "Chili Bean Noodles";
-  chineseModel.image = "assets/images/chilibeans.png";
+  chineseModel.image = "assets/images/chilibeansshredded.png";
   chineseModel.price = "650";
   chineseModel.desc =
       "Noodles tossed in a savory, spicy chili bean sauce, combining rich umami flavors with a bold kick of heat. Topped with fresh herbs and vegetables, this dish offers a satisfying blend of textures and bold, tangy spice.";

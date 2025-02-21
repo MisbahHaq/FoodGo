@@ -66,7 +66,7 @@ List<MexicanModel> getMexican() {
   mexicanModel = new MexicanModel();
 
   mexicanModel.name = "Yakitori";
-  mexicanModel.image = "assets/images/yakitori.png";
+  mexicanModel.image = "assets/images/yakisoba.png";
   mexicanModel.price = "1250";
   mexicanModel.desc =
       "Grilled skewered chicken, marinated in a savory tare sauce, with a perfect balance of sweet and salty flavors. Often served with scallions or vegetables, this Japanese street food is tender, smoky, and delicious.";
