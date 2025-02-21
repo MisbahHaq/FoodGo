@@ -35,6 +35,7 @@ class _SignUpState extends State<SignUp> {
           "Name": nameController.text,
           "Email": mailController.text,
           "Id": Id,
+          "Wallet": "0",
         };
         await SharedpreferencesHelper().saveUserEmail(email);
         await SharedpreferencesHelper().saveUserDisplayName(

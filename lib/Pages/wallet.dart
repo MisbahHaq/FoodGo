@@ -1,5 +1,14 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:foodgo/Service/database.dart';
+import 'package:foodgo/Service/keys.dart';
+import 'package:foodgo/Service/shared_pref.dart';
 import 'package:foodgo/Service/widget_support.dart';
+import 'package:http/http.dart' as http;
+import 'package:random_string/random_string.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({super.key});
@@ -9,6 +18,55 @@ class WalletPage extends StatefulWidget {
 }
 
 class _WalletPageState extends State<WalletPage> {
+  Map<String, dynamic>? paymentIntent;
+
+  String? email, wallet, id;
+
+  getthesharedpref() async {
+    email = await SharedpreferencesHelper().getUserEmail();
+    id = await SharedpreferencesHelper().getUserId();
+    setState(() {});
+  }
+
+  getUserWallet() async {
+    await getthesharedpref();
+    QuerySnapshot querysnapshot = await DatabaseMethods().getUserWalletbyemail(
+      email!,
+    );
+
+    if (querysnapshot.docs.isNotEmpty) {
+      var walletData = querysnapshot.docs[0];
+      Map<String, dynamic> walletMap =
+          walletData.data() as Map<String, dynamic>;
+
+      // Safely access the "Wallet" field
+      if (walletMap.containsKey("Wallet")) {
+        wallet = "${walletMap["Wallet"]}";
+        print(wallet); // This will show the wallet value in the console
+      } else {
+        print("Wallet field does not exist.");
+      }
+    } else {
+      print("No documents found for this email.");
+    }
+
+    setState(() {});
+
+    // QuerySnapshot querysnapshot = await DatabaseMethods().getUserWalletbyemail(
+    //   email!,
+    // );
+    // wallet = "${querysnapshot.docs[0]["Wallet"]}";
+    // print(wallet);
+    // setState(() {});
+  }
+
+  @override
+  void initState() {
+    getUserWallet();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +121,7 @@ class _WalletPageState extends State<WalletPage> {
                                     style: AppWidget.SimpleTextStyle(),
                                   ),
                                   Text(
-                                    "Rs 0.00",
+                                    "Rs ${wallet ?? "0.00"}",
                                     style: AppWidget.HeadlineTextStyle(),
                                   ),
                                 ],
@@ -79,21 +137,26 @@ class _WalletPageState extends State<WalletPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            height: 50,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: Colors.black45,
-                                width: 2,
+                          GestureDetector(
+                            onTap: () {
+                              makePayment("100");
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  color: Colors.black45,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Rs100",
-                                style: AppWidget.PriceTextStyle(),
+                              child: Center(
+                                child: Text(
+                                  "Rs100",
+                                  style: AppWidget.PriceTextStyle(),
+                                ),
                               ),
                             ),
                           ),
@@ -160,5 +223,106 @@ class _WalletPageState extends State<WalletPage> {
         ),
       ),
     );
+  }
+
+  Future<void> makePayment(String amount) async {
+    try {
+      print("Creating payment intent...");
+      paymentIntent = await createPaymentIntent(amount, 'pkr');
+      print("Payment Intent created: $paymentIntent");
+
+      await Stripe.instance
+          .initPaymentSheet(
+            paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret: paymentIntent?['client_secret'],
+              style: ThemeMode.dark,
+              merchantDisplayName: "Misbah",
+            ),
+          )
+          .then((value) {});
+
+      displayPaymentSheet(amount);
+    } catch (e) {
+      print('Error creating payment sheet: $e');
+    }
+  }
+
+  displayPaymentSheet(String amount) async {
+    try {
+      await Stripe.instance
+          .presentPaymentSheet()
+          .then((value) async {
+            await DatabaseMethods().updateUserWallet(amount, id)
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.green,
+                content: Text(
+                  "Order Placed Successfully!",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            );
+
+            showDialog(
+              context: context,
+              builder:
+                  (_) => AlertDialog(
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.check_circle_rounded,
+                              color: Colors.green,
+                            ),
+                            Text("Payment Successful"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+            );
+            paymentIntent = null;
+          })
+          .onError((error, StackTrace) {
+            print("Error is: $error $StackTrace");
+          });
+    } on StripeException catch (e) {
+      print("Stripe Error is: $e");
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(content: Text("Payment cancelled")),
+      );
+    } catch (e) {
+      print("Error is: $e");
+    }
+  }
+
+  calculateAmount(String amount) {
+    return (double.parse(amount) * 100).toStringAsFixed(0);
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': calculateAmount(amount),
+        'currency': currency,
+        'payment_method_types[]': 'card',
+      };
+
+      var response = await http.post(
+        Uri.parse("https://api.stripe.com/v1/payment_intents"),
+        headers: {
+          'Authorization': 'Bearer $secretkey',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: body,
+      );
+      print("Payment Intent Response: ${response.body}");
+      return jsonDecode(response.body);
+    } catch (err) {
+      print('Error charging user: ${err.toString()}');
+    }
   }
 }

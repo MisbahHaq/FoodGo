@@ -38,4 +38,17 @@ class DatabaseMethods {
         .collection("Orders")
         .snapshots();
   }
+
+  Future<QuerySnapshot> getUserWalletbyemail(String email) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .where("Email", isEqualTo: email)
+        .get();
+  }
+
+  Future updateUserWallet(String amount, String id) async {
+    return await FirebaseFirestore.instance.collection("users").doc(id).update({
+      "Wallet": amount,
+    });
+  }
 }
