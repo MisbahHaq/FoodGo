@@ -23,13 +23,13 @@ List<BurgerModel> getBurger() {
   burger.add(burgerModel);
   burgerModel = new BurgerModel();
 
-  //   burgerModel.name = "Beef Burger";
-  //   burgerModel.image = "assets/images/beef burger.png";
-  //   burgerModel.price = "550";
-  //   burgerModel.desc =
-  //       "A juicy, seasoned patty is the star of this burger, paired with fresh toppings like lettuce, tomatoes, onions, and pickles, all nestled in a soft, toasted bun for a rich and satisfying bite. Perfect for those craving a hearty, savory meal.";
-  //   burger.add(burgerModel);
-  //   burgerModel = new BurgerModel();
+  burgerModel.name = "Beef Burger";
+  burgerModel.image = "assets/images/beef burger.png";
+  burgerModel.price = "550";
+  burgerModel.desc =
+      "A juicy, seasoned patty is the star of this burger, paired with fresh toppings like lettuce, tomatoes, onions, and pickles, all nestled in a soft, toasted bun for a rich and satisfying bite. Perfect for those craving a hearty, savory meal.";
+  burger.add(burgerModel);
+  burgerModel = new BurgerModel();
 
   burgerModel.name = "Veggie Pizza";
   burgerModel.image = "assets/images/burger2.png";
