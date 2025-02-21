@@ -18,6 +18,7 @@ class WalletPage extends StatefulWidget {
 }
 
 class _WalletPageState extends State<WalletPage> {
+  TextEditingController amountcontroller = new TextEditingController();
   Map<String, dynamic>? paymentIntent;
 
   String? email, wallet, id;
@@ -39,10 +40,9 @@ class _WalletPageState extends State<WalletPage> {
       Map<String, dynamic> walletMap =
           walletData.data() as Map<String, dynamic>;
 
-      // Safely access the "Wallet" field
       if (walletMap.containsKey("Wallet")) {
         wallet = "${walletMap["Wallet"]}";
-        print(wallet); // This will show the wallet value in the console
+        print(wallet);
       } else {
         print("Wallet field does not exist.");
       }
@@ -51,13 +51,6 @@ class _WalletPageState extends State<WalletPage> {
     }
 
     setState(() {});
-
-    // QuerySnapshot querysnapshot = await DatabaseMethods().getUserWalletbyemail(
-    //   email!,
-    // );
-    // wallet = "${querysnapshot.docs[0]["Wallet"]}";
-    // print(wallet);
-    // setState(() {});
   }
 
   @override
@@ -162,45 +155,55 @@ class _WalletPageState extends State<WalletPage> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          "Rs500",
-                                          style: AppWidget.PriceTextStyle(),
+                                          "Rs 500",
+                                          style: AppWidget.NewPriceTextStyle(),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    height: 50,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                        color: Colors.black45,
-                                        width: 2,
+                                  GestureDetector(
+                                    onTap: () {
+                                      makePayment("1000");
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: Colors.black45,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Rs1000",
-                                        style: AppWidget.PriceTextStyle(),
+                                      child: Center(
+                                        child: Text(
+                                          "Rs 1000",
+                                          style: AppWidget.NewPriceTextStyle(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    height: 50,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                        color: Colors.black45,
-                                        width: 2,
+                                  GestureDetector(
+                                    onTap: () {
+                                      makePayment("2000");
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: Colors.black45,
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Rs2000",
-                                        style: AppWidget.PriceTextStyle(),
+                                      child: Center(
+                                        child: Text(
+                                          "Rs 2000",
+                                          style: AppWidget.NewPriceTextStyle(),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -208,18 +211,23 @@ class _WalletPageState extends State<WalletPage> {
                               ),
                             ),
                             SizedBox(height: 30),
-                            Container(
-                              margin: EdgeInsets.only(left: 20, right: 20),
-                              height: 50,
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color: Color(0xffef2b39),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Add Money",
-                                  style: AppWidget.BoldWhiteTextStyle(),
+                            GestureDetector(
+                              onTap: () {
+                                openBox();
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 20, right: 20),
+                                height: 50,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffef2b39),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Add Custom Amount",
+                                    style: AppWidget.WhiteTextStyle(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -260,7 +268,13 @@ class _WalletPageState extends State<WalletPage> {
       await Stripe.instance
           .presentPaymentSheet()
           .then((value) async {
-            await DatabaseMethods().updateUserWallet(amount, id!);
+            int updatedwallet = int.parse(wallet!) + int.parse(amount);
+            await DatabaseMethods().updateUserWallet(
+              updatedwallet.toString(),
+              id!,
+            );
+            await getUserWallet();
+            setState(() {});
 
             showDialog(
               context: context,
@@ -324,4 +338,80 @@ class _WalletPageState extends State<WalletPage> {
       print('Error charging user: ${err.toString()}');
     }
   }
+
+  Future openBox() => showDialog(
+    context: context,
+    builder:
+        (context) => AlertDialog(
+          content: SingleChildScrollView(
+            child: Container(
+              constraints: BoxConstraints(maxHeight: 200),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.cancel),
+                      ),
+                      SizedBox(width: 30),
+                      Text(
+                        "Add the Amount",
+                        style: TextStyle(
+                          color: Color(0xff008080),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      controller: amountcontroller,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Amount",
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () async {
+                      makePayment(amountcontroller.text);
+                    },
+                    child: Center(
+                      child: Container(
+                        width: 100,
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Color(0xff008080),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Add",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+  );
 }

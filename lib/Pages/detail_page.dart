@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:foodgo/Service/database.dart';
@@ -24,7 +25,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   TextEditingController addresscontroller = new TextEditingController();
   Map<String, dynamic>? paymentIntent;
-  String? name, id, email, address;
+  String? name, id, email, address, wallet;
   int quantity = 1, totalprice = 0;
 
   getthesharedpref() async {
@@ -42,10 +43,34 @@ class _DetailPageState extends State<DetailPage> {
     setState(() {});
   }
 
+  getUserWallet() async {
+    await getthesharedpref();
+    QuerySnapshot querysnapshot = await DatabaseMethods().getUserWalletbyemail(
+      email!,
+    );
+
+    if (querysnapshot.docs.isNotEmpty) {
+      var walletData = querysnapshot.docs[0];
+      Map<String, dynamic> walletMap =
+          walletData.data() as Map<String, dynamic>;
+
+      if (walletMap.containsKey("Wallet")) {
+        wallet = "${walletMap["Wallet"]}";
+        print(wallet);
+      } else {
+        print("Wallet field does not exist.");
+      }
+    } else {
+      print("No documents found for this email.");
+    }
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     totalprice = int.parse(widget.price!);
-    getthesharedpref();
+    getUserWallet();
     super.initState();
   }
 
@@ -170,15 +195,75 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   SizedBox(width: 30),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       print("Checking address...");
                       if (address == null) {
                         print("No address found, opening address box...");
                         openBox();
+                      } else if (int.parse(wallet!) > totalprice) {
+                        // print("Address exists: $address");
+                        // print("Order Now pressed, proceeding to payment...");
+                        // makePayment(totalprice.toString());
+
+                        int updatedwallet = int.parse(wallet!) - totalprice;
+                        await DatabaseMethods().updateUserWallet(
+                          updatedwallet.toString(),
+                          id!,
+                        );
+                        String orderId = randomAlphaNumeric(10);
+                        print("Payment Successful, Order ID: $orderId");
+
+                        Map<String, dynamic> userOrderMap = {
+                          "Name": name,
+                          "Id": id,
+                          "Quantity": quantity.toString(),
+                          "Total": totalprice.toString(),
+                          "Email": email,
+                          "FoodName": widget.name,
+                          "FoodImage": widget.image,
+                          "OrderId": orderId,
+                          "Status": "Pending",
+                          "Address":
+                              address == null
+                                  ? addresscontroller.text
+                                  : address,
+                        };
+
+                        await DatabaseMethods().addUserOrderDetails(
+                          userOrderMap,
+                          id!,
+                          orderId,
+                        );
+
+                        await DatabaseMethods().addAdminOrderDetails(
+                          userOrderMap,
+                          orderId,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text(
+                              "Order Placed Successfully!",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
                       } else {
-                        print("Address exists: $address");
-                        print("Order Now pressed, proceeding to payment...");
-                        makePayment(totalprice.toString());
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text(
+                              "Insufficient Balance!",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        );
                       }
                     },
                     child: Material(
@@ -260,6 +345,7 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: () async {
+                      address = addresscontroller.text;
                       print("Saving address: ${addresscontroller.text}");
                       await SharedpreferencesHelper().saveUserAddress(
                         addresscontroller.text,
