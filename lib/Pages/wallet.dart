@@ -136,6 +136,22 @@ class _WalletPageState extends State<WalletPage> {
                         ],
                       ),
                     ),
+                    SizedBox(height: 30),
+                    Container(
+                      margin: EdgeInsets.only(left: 20, right: 20),
+                      height: 50,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Color(0xffef2b39),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Add Money",
+                          style: AppWidget.BoldWhiteTextStyle(),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
