@@ -132,6 +132,7 @@ class _AllOrdersState extends State<AllOrders> {
                                       ),
                                     ],
                                   ),
+                                  SizedBox(height: 5),
                                   Row(
                                     children: [
                                       Icon(
@@ -143,8 +144,10 @@ class _AllOrdersState extends State<AllOrders> {
                                         ds["Email"],
                                         style: AppWidget.NewSimpleTextStyle(),
                                       ),
+                                      SizedBox(height: 5),
                                     ],
                                   ),
+                                  SizedBox(height: 5),
                                   Text(
                                     ds["Status"],
                                     style: TextStyle(
@@ -153,6 +156,22 @@ class _AllOrdersState extends State<AllOrders> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  SizedBox(height: 5),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Delivered",
+                                        style: AppWidget.NewWhiteTextStyle(),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
                                 ],
                               ),
                             ],

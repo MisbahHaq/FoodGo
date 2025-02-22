@@ -52,6 +52,16 @@ class AppWidget {
     );
   }
 
+  static TextStyle NewWhiteTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
   static TextStyle BoldTextStyle() {
     return GoogleFonts.poppins(
       textStyle: TextStyle(
