@@ -5,7 +5,7 @@ import 'package:foodgo/Pages/home.dart';
 import 'package:foodgo/Service/database.dart';
 import 'package:foodgo/Service/shared_pref.dart';
 import 'package:foodgo/Service/widget_support.dart';
-import 'package:foodgo/bottomnav.dart';
+import 'package:foodgo/Service/bottomnav.dart';
 import 'package:random_string/random_string.dart';
 
 class SignUp extends StatefulWidget {

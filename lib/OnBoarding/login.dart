@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/OnBoarding/signup.dart';
 import 'package:foodgo/Service/widget_support.dart';
-import 'package:foodgo/bottomnav.dart';
+import 'package:foodgo/Service/bottomnav.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});

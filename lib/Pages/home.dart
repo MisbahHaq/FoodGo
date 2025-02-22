@@ -5,11 +5,11 @@ import 'package:foodgo/Model/chinese_model.dart';
 import 'package:foodgo/Model/mexican_model.dart';
 import 'package:foodgo/Model/pizza_model.dart';
 import 'package:foodgo/Pages/detail_page.dart';
-import 'package:foodgo/Service/burger_data.dart';
-import 'package:foodgo/Service/category_data.dart';
-import 'package:foodgo/Service/chinese_data.dart';
-import 'package:foodgo/Service/mexican_data.dart';
-import 'package:foodgo/Service/pizza_data.dart';
+import 'package:foodgo/Food%20Data/burger_data.dart';
+import 'package:foodgo/Food%20Data/category_data.dart';
+import 'package:foodgo/Food%20Data/chinese_data.dart';
+import 'package:foodgo/Food%20Data/mexican_data.dart';
+import 'package:foodgo/Food%20Data/pizza_data.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class Home extends StatefulWidget {

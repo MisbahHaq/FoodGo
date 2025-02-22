@@ -9,7 +9,7 @@ import 'package:foodgo/Pages/detail_page.dart';
 import 'package:foodgo/Pages/home.dart';
 import 'package:foodgo/OnBoarding/onBoarding.dart';
 import 'package:foodgo/Service/keys.dart';
-import 'package:foodgo/bottomnav.dart';
+import 'package:foodgo/Service/bottomnav.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
