@@ -51,4 +51,11 @@ class DatabaseMethods {
       "Wallet": amount,
     });
   }
+
+  Future<Stream<QuerySnapshot>> getAdminOrders() async {
+    return await FirebaseFirestore.instance
+        .collection("Orders")
+        .where("Status", isEqualTo: "Pending")
+        .snapshots();
+  }
 }
