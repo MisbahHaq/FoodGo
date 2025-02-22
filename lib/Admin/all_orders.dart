@@ -52,6 +52,7 @@ class _AllOrdersState extends State<AllOrders> {
                     ),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
+
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -118,6 +119,32 @@ class _AllOrdersState extends State<AllOrders> {
                                     ],
                                   ),
                                   SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person_2_rounded,
+                                        color: Color(0xffef2b39),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        ds["Name"],
+                                        style: AppWidget.SimpleTextStyle(),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.mail_rounded,
+                                        color: Color(0xffef2b39),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        ds["Email"],
+                                        style: AppWidget.NewSimpleTextStyle(),
+                                      ),
+                                    ],
+                                  ),
                                   Text(
                                     ds["Status"],
                                     style: TextStyle(

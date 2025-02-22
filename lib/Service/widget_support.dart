@@ -22,6 +22,16 @@ class AppWidget {
     );
   }
 
+  static TextStyle NewSimpleTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 15,
+        fontWeight: FontWeight.normal,
+      ),
+    );
+  }
+
   static TextStyle FoodOrderTextStyle() {
     return GoogleFonts.poppins(
       textStyle: TextStyle(
