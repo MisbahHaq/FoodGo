@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgo/Admin/home_admin.dart';
 import 'package:foodgo/OnBoarding/login.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
@@ -171,6 +172,11 @@ class _AdminLogInState extends State<AdminLogIn> {
                 style: TextStyle(fontSize: 18),
               ),
             ),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeAdmin()),
           );
         }
       });
