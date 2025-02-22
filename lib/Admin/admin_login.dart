@@ -119,7 +119,9 @@ class _AdminLogInState extends State<AdminLogIn> {
                         ),
                         SizedBox(height: 30),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            loginAdmin();
+                          },
                           child: Center(
                             child: Container(
                               width: 200,
