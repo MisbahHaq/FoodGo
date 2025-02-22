@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgo/OnBoarding/signup.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class onBoarding extends StatefulWidget {
@@ -31,20 +32,28 @@ class _onBoardingState extends State<onBoarding> {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
-            Container(
-              height: 60,
-              width: MediaQuery.of(context).size.width / 2,
-              decoration: BoxDecoration(
-                color: Color(0xffBc592a),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
-                child: Text(
-                  "Get Started",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUp()),
+                );
+              },
+              child: Container(
+                height: 60,
+                width: MediaQuery.of(context).size.width / 2,
+                decoration: BoxDecoration(
+                  color: Color(0xffBc592a),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
