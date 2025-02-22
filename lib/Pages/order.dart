@@ -66,7 +66,11 @@ class _OrderPageState extends State<OrderPage> {
                         right: 20,
                       ),
                       child: Container(
-                        margin: EdgeInsets.only(left: 20, right: 20),
+                        margin: EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          bottom: 20,
+                        ),
                         child: Material(
                           elevation: 3,
                           borderRadius: BorderRadius.only(
