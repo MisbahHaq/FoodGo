@@ -50,7 +50,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: 30),
+                    Container(
+                      height: 150,
+                      width: 150,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(120),
+                        child: Image.asset(
+                          "assets/images/boy.jpg",
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40),
+
                     Container(
                       margin: EdgeInsets.only(left: 20, right: 20),
                       child: Material(
@@ -102,63 +114,62 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 20),
 
-                    Container(
-                      height: 150,
-                      width: 150,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(120),
-                        child: Image.asset(
-                          "assets/images/boy.jpg",
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                    Container(
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      child: Material(
-                        elevation: 3,
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          padding: EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                            top: 20,
-                            bottom: 20,
-                          ),
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.logout_rounded,
-                                color: Color(0xffef2b39),
-                                size: 35,
-                              ),
-                              SizedBox(width: 15),
-                              Text(
-                                "LogOut",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => onBoarding()),
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: Material(
+                          elevation: 3,
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            padding: EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              top: 20,
+                              bottom: 20,
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.logout_rounded,
+                                  color: Color(0xffef2b39),
+                                  size: 35,
                                 ),
-                              ),
-                              Spacer(),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Color(0xffef2b39),
-                              ),
-                            ],
+                                SizedBox(width: 15),
+                                Text(
+                                  "LogOut",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Spacer(),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: Color(0xffef2b39),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 35),
+                    SizedBox(height: 20),
+
+                    // Delete Account Container
                     GestureDetector(
                       onTap: () async {
                         await AuthMethods().deleteUser();
