@@ -1,5 +1,211 @@
-import 'dart:convert';
+// import 'dart:convert';
 
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
+// import 'package:foodgo/Service/database.dart';
+// import 'package:foodgo/Service/keys.dart';
+// import 'package:foodgo/Service/shared_pref.dart';
+// import 'package:foodgo/Service/widget_support.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:intl/intl.dart';
+// import 'package:random_string/random_string.dart';
+
+// class WalletPage extends StatefulWidget {
+//   const WalletPage({super.key});
+
+//   @override
+//   State<WalletPage> createState() => _WalletPageState();
+// }
+
+// class _WalletPageState extends State<WalletPage> {
+//   TextEditingController amountcontroller = new TextEditingController();
+//   Map<String, dynamic>? paymentIntent;
+
+//   String? email, wallet, id;
+
+//   getthesharedpref() async {
+//     email = await SharedpreferencesHelper().getUserEmail();
+//     id = await SharedpreferencesHelper().getUserId();
+//     setState(() {});
+//   }
+
+//   getUserWallet() async {
+//     await getthesharedpref();
+//     QuerySnapshot querysnapshot = await DatabaseMethods().getUserWalletbyemail(
+//       email!,
+//     );
+
+//     if (querysnapshot.docs.isNotEmpty) {
+//       var walletData = querysnapshot.docs[0];
+//       Map<String, dynamic> walletMap =
+//           walletData.data() as Map<String, dynamic>;
+
+//       if (walletMap.containsKey("Wallet")) {
+//         wallet = "${walletMap["Wallet"]}";
+//         print(wallet);
+//       } else {
+//         print("Wallet field does not exist.");
+//       }
+//     } else {
+//       print("No documents found for this email.");
+//     }
+
+//     setState(() {});
+//   }
+
+//   @override
+//   void initState() {
+//     getUserWallet();
+
+//     super.initState();
+//   }
+
+//   Stream? walletStream;
+
+//   Widget allTransactions() {
+//     return FutureBuilder<Stream<QuerySnapshot>>(
+//       future: walletStream(),
+//       builder: (context, AsyncSnapshot<Stream<QuerySnapshot>> snapshot) {
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return Center(child: CircularProgressIndicator());
+//         } else if (snapshot.hasError) {
+//           return Center(child: Text('Error: ${snapshot.error}'));
+//         } else if (!snapshot.hasData || snapshot.data == null) {
+//           return Center(child: Text('No Orders Found'));
+//         } else {
+//           return StreamBuilder<QuerySnapshot>(
+//             stream: snapshot.data,
+//             builder: (context, AsyncSnapshot<QuerySnapshot> orderSnapshot) {
+//               if (orderSnapshot.connectionState == ConnectionState.waiting) {
+//                 return Center(child: CircularProgressIndicator());
+//               } else if (orderSnapshot.hasError) {
+//                 return Center(child: Text('Error: ${orderSnapshot.error}'));
+//               } else if (!orderSnapshot.hasData ||
+//                   orderSnapshot.data!.docs.isEmpty) {
+//                 return Center(child: Text('No Orders Found'));
+//               } else {
+//                 return ListView.builder(
+//                   padding: EdgeInsets.zero,
+//                   itemCount: orderSnapshot.data!.docs.length,
+//                   itemBuilder: (context, index) {
+//                     DocumentSnapshot ds = orderSnapshot.data!.docs[index];
+//                     return Padding(
+//                       padding: const EdgeInsets.only(
+//                         top: 15,
+//                         left: 20,
+//                         right: 20,
+//                       ),
+//                       child: Container(
+//                         margin: EdgeInsets.only(
+//                           left: 20,
+//                           right: 20,
+//                           bottom: 20,
+//                         ),
+//                         child: Material(
+//                           elevation: 3,
+//                           borderRadius: BorderRadius.only(
+//                             topLeft: Radius.circular(10),
+//                             topRight: Radius.circular(10),
+//                           ),
+//                           child: Container(
+//                             width: MediaQuery.of(context).size.width,
+//                             decoration: BoxDecoration(
+//                               color: Colors.white,
+//                               borderRadius: BorderRadius.only(
+//                                 topLeft: Radius.circular(10),
+//                                 topRight: Radius.circular(10),
+//                               ),
+//                             ),
+//                             child: Column(
+//                               children: [
+//                                 SizedBox(height: 5),
+//                                 Row(
+//                                   mainAxisAlignment: MainAxisAlignment.center,
+//                                   children: [
+//                                     Icon(
+//                                       Icons.location_on_rounded,
+//                                       color: Color(0xffef2b39),
+//                                     ),
+//                                     SizedBox(width: 10),
+//                                     Text(
+//                                       ds["Address"],
+//                                       style: AppWidget.BoldTextStyle(),
+//                                     ),
+//                                   ],
+//                                 ),
+//                                 Divider(),
+//                                 Row(
+//                                   children: [
+//                                     Image.asset(
+//                                       ds["FoodImage"],
+//                                       height: 120,
+//                                       width: 120,
+//                                       fit: BoxFit.contain,
+//                                     ),
+//                                     SizedBox(width: 20),
+//                                     Column(
+//                                       crossAxisAlignment:
+//                                           CrossAxisAlignment.start,
+//                                       children: [
+//                                         Text(
+//                                           ds["FoodName"],
+//                                           style: AppWidget.FoodOrderTextStyle(),
+//                                         ),
+//                                         SizedBox(height: 10),
+//                                         Row(
+//                                           children: [
+//                                             Icon(
+//                                               Icons.shopping_cart,
+//                                               color: Color(0xffef2b39),
+//                                             ),
+//                                             SizedBox(width: 10),
+//                                             Text(
+//                                               ds["Quantity"],
+//                                               style: AppWidget.BoldTextStyle(),
+//                                             ),
+//                                             SizedBox(width: 30),
+//                                             Icon(
+//                                               Icons.monetization_on_rounded,
+//                                               color: Color(0xffef2b39),
+//                                             ),
+//                                             SizedBox(width: 10),
+//                                             Text(
+//                                               ds["Total"],
+//                                               style: AppWidget.BoldTextStyle(),
+//                                             ),
+//                                           ],
+//                                         ),
+//                                         SizedBox(height: 10),
+//                                         Text(
+//                                           ds["Status"],
+//                                           style: TextStyle(
+//                                             color: Color(0xffef2b39),
+//                                             fontSize: 20,
+//                                             fontWeight: FontWeight.bold,
+//                                           ),
+//                                         ),
+//                                       ],
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                     );
+//                   },
+//                 );
+//               }
+//             },
+//           );
+//         }
+//       },
+//     );
+//   }
+
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -24,14 +230,17 @@ class _WalletPageState extends State<WalletPage> {
 
   String? email, wallet, id;
 
+  // Fetch user shared preferences data
   getthesharedpref() async {
     email = await SharedpreferencesHelper().getUserEmail();
     id = await SharedpreferencesHelper().getUserId();
     setState(() {});
   }
 
+  // Fetch user wallet information from Firestore
   getUserWallet() async {
     await getthesharedpref();
+    walletStream = await DatabaseMethods().getUserTransaction(id!);
     QuerySnapshot querysnapshot = await DatabaseMethods().getUserWalletbyemail(
       email!,
     );
@@ -56,9 +265,71 @@ class _WalletPageState extends State<WalletPage> {
 
   @override
   void initState() {
-    getUserWallet();
-
     super.initState();
+    getUserWallet();
+  }
+
+  // Updated function to return a Stream directly
+  Stream<QuerySnapshot> getUserTransactionStream() {
+    return DatabaseMethods().getUserTransaction(id!);
+  }
+
+  Stream? walletStream;
+  Widget allTransactions() {
+    return StreamBuilder<QuerySnapshot>(
+      stream:
+          getUserTransactionStream(), // Directly use Stream from getUserTransactionStream
+      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Center(child: Text('No Orders Found'));
+        } else {
+          return ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) {
+              DocumentSnapshot ds = snapshot.data!.docs[index];
+              return Container(
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Color(0xffececf8),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(ds["Date"], style: AppWidget.HeadlineTextStyle()),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("Amount Added to Wallet"),
+                          SizedBox(height: 5),
+                          Text(
+                            "Rs " + ds["Amount"],
+                            style: TextStyle(
+                              color: Color(0xffef2b39),
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -249,6 +520,13 @@ class _WalletPageState extends State<WalletPage> {
                                     Text(
                                       "Your Transactions",
                                       style: AppWidget.NewBoldTextStyle(),
+                                    ),
+                                    SizedBox(height: 20),
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                          2.5,
+                                      child: allTransactions(),
                                     ),
                                   ],
                                 ),

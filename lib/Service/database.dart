@@ -95,4 +95,19 @@ class DatabaseMethods {
         .collection("Transaction")
         .add(userOrderMap);
   }
+
+  // Future<Stream<QuerySnapshot>> getUserTransaction(String id) async {
+  //   return await FirebaseFirestore.instance
+  //       .collection("users")
+  //       .doc(id)
+  //       .collection("Transaction")
+  //       .snapshots();
+  // }
+  Stream<QuerySnapshot> getUserTransaction(String id) {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(id)
+        .collection("Transaction")
+        .snapshots();
+  }
 }
