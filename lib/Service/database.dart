@@ -58,4 +58,19 @@ class DatabaseMethods {
         .where("Status", isEqualTo: "Pending")
         .snapshots();
   }
+
+  Future updateAdminOrder(String id) async {
+    return await FirebaseFirestore.instance.collection("Orders").doc(id).update(
+      {"Status": "Delivered"},
+    );
+  }
+
+  Future updateUserOrder(String userid, String docid) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userid)
+        .collection("Orders")
+        .doc(docid)
+        .update({"Status": "Delivered"});
+  }
 }
