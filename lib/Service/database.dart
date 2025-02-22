@@ -84,4 +84,15 @@ class DatabaseMethods {
         .doc(id)
         .delete();
   }
+
+  Future addUserTransaction(
+    Map<String, dynamic> userOrderMap,
+    String id,
+  ) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .doc(id)
+        .collection("Transaction")
+        .add(userOrderMap);
+  }
 }

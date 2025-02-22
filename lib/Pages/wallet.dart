@@ -8,6 +8,7 @@ import 'package:foodgo/Service/keys.dart';
 import 'package:foodgo/Service/shared_pref.dart';
 import 'package:foodgo/Service/widget_support.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:random_string/random_string.dart';
 
 class WalletPage extends StatefulWidget {
@@ -297,7 +298,15 @@ class _WalletPageState extends State<WalletPage> {
             );
             await getUserWallet();
             setState(() {});
+            DateTime now = DateTime.now();
+            String formattedDate = DateFormat("dd MMM").format(now);
 
+            Map<String, dynamic> userTransactions = {
+              "Amount": amount,
+              "Date": formattedDate,
+            };
+
+            await DatabaseMethods().addUserTransaction(userTransactions, id!);
             showDialog(
               context: context,
               builder:
