@@ -96,18 +96,21 @@ class DatabaseMethods {
         .add(userOrderMap);
   }
 
-  // Future<Stream<QuerySnapshot>> getUserTransaction(String id) async {
-  //   return await FirebaseFirestore.instance
-  //       .collection("users")
-  //       .doc(id)
-  //       .collection("Transaction")
-  //       .snapshots();
-  // }
   Stream<QuerySnapshot> getUserTransaction(String id) {
     return FirebaseFirestore.instance
         .collection("users")
         .doc(id)
         .collection("Transaction")
         .snapshots();
+  }
+
+  Future<QuerySnapshot> search(String updatedname) async {
+    return await FirebaseFirestore.instance
+        .collection("Food")
+        .where(
+          "SearchKey",
+          isEqualTo: updatedname.substring(0, 1).toUpperCase(),
+        )
+        .get();
   }
 }

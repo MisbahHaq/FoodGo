@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:foodgo/Model/burger_model.dart';
 import 'package:foodgo/Model/category_model.dart';
@@ -10,6 +11,7 @@ import 'package:foodgo/Food%20Data/category_data.dart';
 import 'package:foodgo/Food%20Data/chinese_data.dart';
 import 'package:foodgo/Food%20Data/mexican_data.dart';
 import 'package:foodgo/Food%20Data/pizza_data.dart';
+import 'package:foodgo/Service/database.dart';
 import 'package:foodgo/Service/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -20,12 +22,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController searchcontroller = new TextEditingController();
   List<CategoryModel> categories = [];
   List<PizzaModel> pizza = [];
   List<BurgerModel> burger = [];
   List<ChineseModel> chinese = [];
   List<MexicanModel> mexican = [];
   String track = "0";
+
+  bool search = false;
   @override
   void initState() {
     categories = getCategories();
@@ -34,6 +39,40 @@ class _HomeState extends State<Home> {
     chinese = getChinese();
     mexican = getMexican();
     super.initState();
+  }
+
+  var queryResultSet = [];
+  var tempSearchStore = [];
+
+  initiateSearch(value) {
+    if (value.length == 0) {
+      setState(() {
+        queryResultSet = [];
+        tempSearchStore = [];
+      });
+    }
+    setState(() {
+      search = true;
+    });
+
+    var CapitalizedValue =
+        value.substring(0, 1).toUppercase() + value.substring(1);
+    if (queryResultSet.isEmpty && value.length == 1) {
+      DatabaseMethods().search(value).then((QuerySnapshot docs) {
+        for (int i = 0; i < docs.docs.length; ++i) {
+          queryResultSet.add(docs.docs[i].data());
+        }
+      });
+    } else {
+      tempSearchStore = [];
+      queryResultSet.forEach((element) {
+        if (element['Name'].startsWith(CapitalizedValue)) {
+          setState(() {
+            tempSearchStore.add(element);
+          });
+        }
+      });
+    }
   }
 
   @override
@@ -88,6 +127,10 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
+                      controller: searchcontroller,
+                      onChanged: (value) {
+                        initiateSearch(value.toUpperCase());
+                      },
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Search food item..",
