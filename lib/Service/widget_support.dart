@@ -72,6 +72,16 @@ class AppWidget {
     );
   }
 
+  static TextStyle NewBoldTextStyle() {
+    return GoogleFonts.poppins(
+      textStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
   static TextStyle PriceTextStyle() {
     return GoogleFonts.poppins(
       textStyle: TextStyle(
