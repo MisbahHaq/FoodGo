@@ -77,4 +77,11 @@ class DatabaseMethods {
   Future<Stream<QuerySnapshot>> getAllUsers() async {
     return await FirebaseFirestore.instance.collection("users").snapshots();
   }
+
+  Future deleteUser(String id) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .doc(id)
+        .delete();
+  }
 }

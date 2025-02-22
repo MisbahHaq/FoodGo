@@ -99,17 +99,24 @@ class _ManageUsersState extends State<ManageUsers> {
                                     ],
                                   ),
                                   SizedBox(height: 10),
-                                  Container(
-                                    height: 35,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Remove",
-                                        style: AppWidget.WhiteTextStyle(),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      await DatabaseMethods().deleteUser(
+                                        ds["Id"],
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 35,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Remove",
+                                          style: AppWidget.WhiteTextStyle(),
+                                        ),
                                       ),
                                     ),
                                   ),

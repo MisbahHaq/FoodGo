@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:foodgo/Admin/admin_login.dart';
 import 'package:foodgo/Admin/all_orders.dart';
+import 'package:foodgo/Admin/home_admin.dart';
 import 'package:foodgo/Admin/manage_users.dart';
 import 'package:foodgo/OnBoarding/login.dart';
 import 'package:foodgo/OnBoarding/signup.dart';
@@ -24,6 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: ManageUsers());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: HomeAdmin());
   }
 }
