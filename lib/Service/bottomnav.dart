@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:foodgo/Pages/chat_page.dart';
 import 'package:foodgo/Pages/home.dart';
 import 'package:foodgo/Pages/order.dart';
 import 'package:foodgo/Pages/profile.dart';
@@ -15,7 +16,13 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int currentTabIndex = 0;
 
-  final List<Widget> pages = [Home(), OrderPage(), WalletPage(), ProfilePage()];
+  final List<Widget> pages = [
+    Home(),
+    OrderPage(),
+    WalletPage(),
+    ProfilePage(),
+    ChatScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +47,7 @@ class _BottomNavState extends State<BottomNav> {
               Icon(Icons.shopping_bag_rounded, color: Colors.white, size: 30),
               Icon(Icons.wallet_rounded, color: Colors.white, size: 30),
               Icon(Icons.person, color: Colors.white, size: 30),
+              Icon(Icons.message_rounded, color: Colors.white, size: 30),
             ],
           );
         },
