@@ -230,14 +230,12 @@ class _WalletPageState extends State<WalletPage> {
 
   String? email, wallet, id;
 
-  // Fetch user shared preferences data
   getthesharedpref() async {
     email = await SharedpreferencesHelper().getUserEmail();
     id = await SharedpreferencesHelper().getUserId();
     setState(() {});
   }
 
-  // Fetch user wallet information from Firestore
   getUserWallet() async {
     await getthesharedpref();
     walletStream = await DatabaseMethods().getUserTransaction(id!);
@@ -269,7 +267,6 @@ class _WalletPageState extends State<WalletPage> {
     getUserWallet();
   }
 
-  // Updated function to return a Stream directly
   Stream<QuerySnapshot> getUserTransactionStream() {
     return DatabaseMethods().getUserTransaction(id!);
   }
@@ -277,8 +274,7 @@ class _WalletPageState extends State<WalletPage> {
   Stream? walletStream;
   Widget allTransactions() {
     return StreamBuilder<QuerySnapshot>(
-      stream:
-          getUserTransactionStream(), // Directly use Stream from getUserTransactionStream
+      stream: getUserTransactionStream(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
